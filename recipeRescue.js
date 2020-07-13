@@ -1,7 +1,7 @@
 //Prepare form data
 var formData = new FormData();
-formData.append("file", fileToUpload);
-formData.append("url", "URL-of-Image-or-PDF-file");
+//formData.append("file", fileToUpload);
+formData.append("url", "https://cdn2.hubspot.net/hubfs/62289/images/Blog_images/recipes/RecipeBlog-GarlicMashedPotatoes.pdf"); // name of file // "URL-of-Image-or-PDF-file"
 formData.append("language"   , "eng");
 formData.append("apikey"  , myOCRkey);
 formData.append("isOverlayRequired", True);
@@ -49,6 +49,12 @@ default:
 pageText += "Error: " + errorMessage;
 break;
 }
+
+let previewImage = document.getElementById("screen");
+let previewImage = document.getElementById("screenWoverlay");
+let previewImage = document.getElementById("pImage");
+let previewImage = document.getElementById("scanner");
+let previewImage = document.getElementById("scanResults");
 
 $.each(textOverlay["Lines"], function (index, value) {
 
