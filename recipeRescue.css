@@ -4,7 +4,6 @@ body {
     color: #000;
 
 }
-
 #screen {
     width: 40%;
     height: 50vw;
@@ -15,7 +14,6 @@ body {
     overflow:auto;
     text-align: center;
 }
-
 #screenWoverlay {
     width: 40%;
     height: 50vw;
@@ -37,7 +35,6 @@ body {
     margin-left: 1vw;
     margin-bottom: 1vw;
 }
-
 #scanResults {
     clear: both;
     width: 82%;

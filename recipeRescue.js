@@ -55,6 +55,7 @@ let previewImage = document.getElementById("screenWoverlay");
 let previewImage = document.getElementById("pImage");
 let previewImage = document.getElementById("scanner");
 let previewImage = document.getElementById("scanResults");
+/// trying to fix this //
 
 $.each(textOverlay["Lines"], function (index, value) {
 
