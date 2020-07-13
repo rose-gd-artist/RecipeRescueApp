@@ -1,0 +1,46 @@
+body {
+    background-color: #F7941D;
+    box-sizing: border-box;
+    color: #000;
+
+}
+#screen {
+    width: 40%;
+    height: 50vw;
+    margin: 1vw;
+    background-color: #fff;
+    border: 1px solid #000;
+    float: left;
+    overflow:auto;
+    text-align: center;
+}
+#screenWoverlay {
+    width: 40%;
+    height: 50vw;
+    margin: 1vw;
+    background-color: #fff;
+    border: 1px solid #000;
+    float: left;
+    overflow:auto;
+    text-align: center;
+}
+.preview {
+    clear: both;
+    float: left;
+    margin-left: 1vw;
+    margin-bottom: 1vw;
+}
+.scan {
+    float: left;
+    margin-left: 1vw;
+    margin-bottom: 1vw;
+}
+#scanResults {
+    clear: both;
+    width: 82%;
+    height: 30vw;
+    margin: 2vw 1vw;
+    background-color: #fff;
+    border: 1px solid #000;
+    text-align: center;
+}
