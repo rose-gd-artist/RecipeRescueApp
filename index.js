@@ -1,69 +1,51 @@
-$(document).ready(function () {
+$(document).ready(function(){
 
-  //Prepare form data
-  var formData = new FormData();
-  formData.append("url", "https://cdn2.hubspot.net/hubfs/62289/images/Blog_images/recipes/RecipeBlog-GarlicMashedPotatoes.pdf");
-  // formData.append("filetype", "OCREngine=2&filetype=pdf");
-  formData.append("language", "eng");
-  formData.append("apikey", apiKey);
-  formData.append("isOverlayRequired", "True");
-  //Send OCR Parsing request asynchronously
-  jQuery.ajax({
-    url: "https://api.ocr.space/parse/image/",
-    data: formData,
-    contentType: "application/json; charset=utf-8",
-    cache: false,
-    contentType: false,
-    processData: false,
-    type: 'POST',
+    let search = document.getElementById("search");
+    let submit = document.getElementById("submit");
+    let resultsBox = document.getElementById("results");
 
-    success: function (ocrParsedResult) {
-      //Get the parsed results, exit code and error message and details
-      var parsedResults = ocrParsedResult["ParsedResults"];
-      var ocrExitCode = ocrParsedResult["OCRExitCode"];
-      var isErroredOnProcessing = ocrParsedResult["IsErroredOnProcessing"];
-      var errorMessage = ocrParsedResult["ErrorMessage"];
-      var errorDetails = ocrParsedResult["ErrorDetails"];
-      var processingTimeInMilliseconds = ocrParsedResult["ProcessingTimeInMilliseconds"];
-      //If we have got parsed results, then loop over the results to do something
+    submit.addEventListener("click", getRecipe);
+
+    function getRecipe(){
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            //"url": "https://recipe-puppy.p.rapidapi.com/?p=1&i=onions%252Cgarlic&q=omelet",
+            "url": "https://recipe-puppy.p.rapidapi.com/?i=" + search.value,
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
+                "x-rapidapi-key": recipePuppyAPI
+            }
+        }/* end of settings */
+        
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+            displayRecipes(response);
+        }); /* end of ajax fx */
+
+        function displayRecipes(searchedIngredients){
+
+            let answer = searchedIngredients;
+            let newAnswer = JSON.parse(answer);
+
+            for(let i = 0; i < newAnswer.results.length; i++){
+                let recipeListing = document.createElement("div");
+                resultsBox.append(recipeListing);
+                recipeListing.classList.add("food-block");
+                recipeListing.innerHTML = "<div class='food-image'></div>";
+                /* insert food background image ('background-size' property is set to 'cover' so each food image will be the same size) */
+                $(".food-image").eq($(this).index()).css({
+                    "background-image": "url('" + newAnswer.results[i].thumbnail + "')"
+                });
+                recipeListing.innerHTML += "<div class='food-title-and-link'>" + newAnswer.results[i].title + "<br>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>Link to Recipe</a> </div>";
+            } /* end of for loop */
+
+        } /* end of displayRecipe fx */
+    
 
 
+    } /* end of getRecipe fx */
+}) /* end of getRecipe fx */
 
-      if (parsedResults != null) {
-        //Loop through the parsed results
-        $.each(parsedResults, function (index, value) {
-          var exitCode = value["FileParseExitCode"];
-          var parsedText = value["ParsedText"];
-          var errorMessage = value["ParsedTextFileName"];
-          var errorDetails = value["ErrorDetails"];
-
-          var textOverlay = value["TextOverlay"];
-          var pageText = '';
-          switch (+exitCode) {
-            case 1:
-              pageText = parsedText;
-              break;
-            case 0:
-            case -10:
-            case -20:
-            case -30:
-            case -99:
-            default:
-              pageText += "Error: " + errorMessage;
-              break;
-          }
-
-          let contentContainer = document.getElementById("container");
-
-          $.each(textOverlay["Lines"], function (index, value) {
-            // LOOP THROUGH THE LINES AND GET WORDS TO DISPLAY ON TOP OF THE IMAGE AS OVERLAY
-            contentContainer.innerHTML += textOverlay["Lines"][index].LineText + "<br />";
-          });
-
-          // YOUR CODE HERE
-            console.log(ocrParsedResult);
-        });
-      }
-    }
-  }); 
-});
