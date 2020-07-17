@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
-    let search = document.getElementById("search");
+    let searchIngredients = document.getElementById("searchIngredients");
+    let searchFood = document.getElementById("searchFood");
     let submit = document.getElementById("submit");
     let resultsBox = document.getElementById("results");
 
@@ -12,7 +13,7 @@ $(document).ready(function(){
             "async": true,
             "crossDomain": true,
             //"url": "https://recipe-puppy.p.rapidapi.com/?p=1&i=onions%252Cgarlic&q=omelet",
-            "url": "https://recipe-puppy.p.rapidapi.com/?i=" + search.value,
+            "url": "https://recipe-puppy.p.rapidapi.com/?i=" + searchIngredients.value + "&q=" + searchFood.value,
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
