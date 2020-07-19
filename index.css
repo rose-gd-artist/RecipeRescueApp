@@ -36,6 +36,7 @@ body {
  	height: 6rem;
  	background-size: cover;
  	background-position: center;
+ 	background-color: #dedddd;
 }
 
 .food-title-and-link {
@@ -52,8 +53,50 @@ body {
     text-decoration: none;
     font-weight: bold;
     color: #2196F3;
+    cursor: pointer;
+}
+
+.add-to-grocery-list:hover {
+	opacity: .8;
+}
+
+.add-to-grocery-list {
+	font-size: .8rem;
+    text-decoration: none;
+    font-weight: bold;
+    color: #2196F3;
+    cursor: pointer;
 }
 
 .food-title-and-link a:hover {
 	opacity: .8;
+}
+
+.grocery-list-entry {
+	margin-top: 1rem;
+}
+
+.remove-item {
+	display: block;
+	color: red;
+	cursor: pointer;
+	margin-top: -1rem;
+}
+
+/* MEDIA QUERIES *****************************************************************************/
+
+/* Styling for print/export */
+@media print {
+
+	input, button, #results {
+		display: none;
+	}
+
+	#groceryListContainer {
+		display: block;
+	}
+
+	.remove-item {
+		display: none;
+	}
 }
