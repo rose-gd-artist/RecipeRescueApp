@@ -77,17 +77,21 @@ body {
 }
 
 .remove-item {
-	display: block;
+	display: inline-block;
 	color: red;
 	cursor: pointer;
 	margin-top: -1rem;
+}
+
+.quantity-field {
+	width: 2rem;
+	margin-left: .5rem;
 }
 
 /* MEDIA QUERIES *****************************************************************************/
 
 /* Styling for print/export */
 @media print {
-
 	input, button, #results {
 		display: none;
 	}
@@ -98,5 +102,16 @@ body {
 
 	.remove-item {
 		display: none;
+	}
+	.quantity-field {
+		display: inline-block;
+		border: 0;
+	}
+	::placeholder {
+		display: none;
+		opacity: 0;
+	}
+	.grocery-list-entry {
+		margin-top: 1rem;
 	}
 }
