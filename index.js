@@ -42,7 +42,7 @@ $(document).ready(function(){
                 "background-image": "url('" + newAnswer.results[i].thumbnail + "')"
             });
 
-            /* insert food title, recipe link, and add to grocery list button */
+            /* insert food title, recipe link, and 'add to grocery list' button */
             recipeListing.innerHTML += "<div class='food-title-and-link'>" + newAnswer.results[i].title + "<br>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>Link to Recipe</a> <div class='add-to-grocery-list'>Add to Grocery List</div></div>";
                 
             /* adding ingredients to grocery list */
@@ -54,20 +54,29 @@ $(document).ready(function(){
                 let bulletedList = "";
 
                 for (let i = 0; i < splitIngredientsList.length; i++) {
-                    bulletedList += "<span>&#8226; </span>" + splitIngredientsList[i] + "<input class='quantity-field' placeholder='QTY' type='text'><br>";
+                    bulletedList += "<div class='ingredient-list-entry'><span>&#8226; </span>" + splitIngredientsList[i] + "<input class='quantity-field' placeholder='QTY' type='text'><span class='remove-ingredient'>&times;<span></div>";
                 }
 
                 groceryListContainer.innerHTML += "<div class='grocery-list-entry'><strong>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>" + newAnswer.results[i].title + "</a>" + ":</strong><br>" + bulletedList + "<br><span class='remove-item'>remove item</span></div>";
 
                 /* removing items from a grocery list */
                 let removeItem = document.getElementsByClassName("remove-item");
-                let groceryListEntry = document.getElementsByClassName("grocery-list-entry");
 
                 for (let i = 0; i < removeItem.length; i++) {
                     removeItem[i].addEventListener("click", function () {
                         $('.grocery-list-entry').eq(i).fadeOut(400);
                     });
                 } 
+
+                /* removing ingredients from a grocery list */
+                let removeIngredientItem = document.getElementsByClassName("remove-ingredient");
+
+                for (let i = 0; i < removeIngredientItem.length; i++) {
+                    removeIngredientItem[i].addEventListener("click", function () {
+                        $('.ingredient-list-entry').eq(i).fadeOut(400);
+                    });
+                }
+
             }); /* end click event */
         } /* end of for loop */
     } /* end of displayRecipe fx */
