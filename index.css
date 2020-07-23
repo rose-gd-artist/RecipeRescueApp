@@ -76,11 +76,24 @@ body {
 	margin-top: 1rem;
 }
 
+.ingredient-list-entry {
+    display: block;
+}
+
+/* 'remove item' text under grocery items */
 .remove-item {
-	display: inline-block;
 	color: red;
-	cursor: pointer;
+	display: inline-block;
 	margin-top: -1rem;
+	cursor: pointer;
+}
+
+/* 'X' icon next to ingredient items */
+.remove-ingredient {
+	color: #ffb5b5;
+	font-weight: bold;
+    margin-left: .25rem;
+    cursor: pointer;
 }
 
 .quantity-field {
@@ -101,6 +114,9 @@ body {
 	}
 
 	.remove-item {
+		display: none;
+	}
+	.remove-ingredient {
 		display: none;
 	}
 	.quantity-field {
