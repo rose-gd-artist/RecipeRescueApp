@@ -1,5 +1,19 @@
 $(document).ready(function(){
 
+    /* page tabs */
+    let allTabs = document.getElementsByClassName("tab");
+    let tabContents = document.getElementsByClassName("tab-content");
+
+    for (let i = 0; i < allTabs.length; i++) {
+        allTabs[i].addEventListener("click", function () {
+            for (let i = 0; i < allTabs.length; i++) {
+                tabContents[i].classList.remove("active-tab");
+            }
+            
+            tabContents[i].classList.add("active-tab");
+        });
+    } /* end page tabs */
+
     let searchIngredients = document.getElementById("searchIngredients");
     let searchFood = document.getElementById("searchFood");
     let submit = document.getElementById("submit");
@@ -21,7 +35,6 @@ $(document).ready(function(){
         }
         
         $.ajax(settings).done(function (response) {
-            console.log(response);
             displayRecipes(response);
         }); 
     } /* end of getRecipe fx */

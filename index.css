@@ -8,6 +8,14 @@ body {
 	font-family: 'Nunito Sans', sans-serif;
 }
 
+.tab-content {
+	display: none;
+}
+
+.active-tab {
+	display: block;
+}
+
 /* results container where data is displayed */
 #results {
     display: flex;

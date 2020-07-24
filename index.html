@@ -7,13 +7,20 @@
 </head>
 <body>
 
-<input type="text" id="searchIngredients" placeholder="Ingredients">
-<input type="text" id="searchFood" placeholder="Dish/Food Name">
-<button id="submit">Search</button>
-<button id="exportPDF">Export/Print Shopping List</button>
-<div id="results"></div>
+<button class="tab tab-1">Looking for a Recipe?</button>
+<button class="tab tab-2">Grocery List</button>
 
-<div id="groceryListContainer"></div>
+<div class="tab-content active-tab">
+	<input type="text" id="searchIngredients" placeholder="Ingredients">
+	<input type="text" id="searchFood" placeholder="Dish/Food Name">
+	<button id="submit">Search</button>
+	<div id="results"></div>
+</div>
+
+<div class="tab-content">
+	<button id="exportPDF">Export/Print Shopping List</button>
+	<div id="groceryListContainer"></div>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- JQuery -->
 <script type="text/javascript" src="config.js"></script>
