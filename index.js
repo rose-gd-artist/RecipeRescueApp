@@ -74,25 +74,28 @@ $(document).ready(function(){
 
                 /* removing items from a grocery list */
                 let removeItem = document.getElementsByClassName("remove-item");
-
-                for (let i = 0; i < removeItem.length; i++) {
-                    removeItem[i].addEventListener("click", function () {
-                        $('.grocery-list-entry').eq(i).fadeOut(400);
-                    });
-                } 
+                removeItemOrIngredient (removeItem);
 
                 /* removing ingredients from a grocery list */
                 let removeIngredientItem = document.getElementsByClassName("remove-ingredient");
-
-                for (let i = 0; i < removeIngredientItem.length; i++) {
-                    removeIngredientItem[i].addEventListener("click", function () {
-                        $('.ingredient-list-entry').eq(i).fadeOut(400);
-                    });
-                }
+                removeItemOrIngredient (removeIngredientItem);
 
             }); /* end click event */
         } /* end of for loop */
     } /* end of displayRecipe fx */
+
+    /* function for removing grocery items or ingredients from the list */
+    function removeItemOrIngredient (itemToBeRemoved) {
+        for (let i = 0; i < itemToBeRemoved.length; i++) {
+            itemToBeRemoved[i].addEventListener("click", function () {
+                if (itemToBeRemoved[i].classList.contains("remove-ingredient")) {
+                    $('.ingredient-list-entry').eq(i).fadeOut(400); /* remove ingredient */
+                } else {
+                    $('.grocery-list-entry').eq(i).fadeOut(400); /* remove grocery item */
+                }
+            });
+        }
+    }
 
     /* download/print PDF of grocery list (print settings specified in CSS print media query) */
     let exportPDF = document.getElementById("exportPDF");
