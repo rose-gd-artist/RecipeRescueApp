@@ -1,30 +1,48 @@
 <DOCTYPE! html>
 <html>
 <head>
-	<title></title>
+	<title>Recipe Rescue</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://use.typekit.net/alp8mur.css">
 	<link rel="stylesheet" type="text/css" href="index.css">
 	<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<button class="tab tab-1">Looking for a Recipe?</button>
-<button class="tab tab-2">R + R</button>
-<button class="tab tab-3">Grocery List</button>
+<!-- tabs -->
+<div id="tab-container">
+	<button class="tab tab-1">LOOKING FOR A RECIPE?</button><button class="tab tab-2">R + R Recipes</button><button class="tab tab-3">GROCERY LIST</button>
+</div>
 
+<!-- tab 1 content -->
 <div class="tab-content active-tab">
-	<input type="text" id="searchIngredients" placeholder="Ingredients">
-	<input type="text" id="searchFood" placeholder="Dish/Food Name">
-	<button id="submit">Search</button>
-	<div id="results"></div>
+	<div class="search-bar-container">
+		<input type="text" id="searchIngredients" placeholder="SEARCH BY INGREDIENTS">
+		<input type="text" id="searchFood" placeholder="SEARCH BY FOOD">
+		<button id="submit">Search</button>
+	</div>
+	<div class="results-container">
+		<div id="results"></div>
+	</div>
 </div>
 
+<!-- tab 2 content -->
 <div class="tab-content">
-	[Rosie's R + R Content]
+	<div class="rr-recipes-container">
+		[Rosie's R + R Content]
+	</div>
 </div>
 
+<!-- tab 3 content -->
 <div class="tab-content">
 	<button id="exportPDF">Export/Print Shopping List</button>
 	<div id="groceryListContainer"></div>
+</div>
+
+<!-- footer -->
+<div id="footerR">
+This application was created for educational purposes only.<br>
+2020
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- JQuery -->

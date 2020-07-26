@@ -7,10 +7,9 @@ $(document).ready(function(){
     for (let i = 0; i < allTabs.length; i++) {
         allTabs[i].addEventListener("click", function () {
             for (let i = 0; i < allTabs.length; i++) {
-                tabContents[i].classList.remove("active-tab");
+                tabContents[i].classList.remove("active-tab"); /* remove class from all tabs */
             }
-            
-            tabContents[i].classList.add("active-tab");
+            tabContents[i].classList.add("active-tab"); /* add class to current tab */
         });
     } /* end page tabs */
 
@@ -19,6 +18,8 @@ $(document).ready(function(){
     let submit = document.getElementById("submit");
     let resultsBox = document.getElementById("results");
     let groceryListContainer = document.getElementById("groceryListContainer");
+
+    getRecipe(); /* preload some search results */
 
     submit.addEventListener("click", getRecipe);
 
@@ -56,7 +57,7 @@ $(document).ready(function(){
             });
 
             /* insert food title, recipe link, and 'add to grocery list' button */
-            recipeListing.innerHTML += "<div class='food-title-and-link'>" + newAnswer.results[i].title + "<br>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>Link to Recipe</a> <div class='add-to-grocery-list'>Add to Grocery List</div></div>";
+            recipeListing.innerHTML += "<div class='food-title-and-link'><span class='food-title'>" + newAnswer.results[i].title + "</span><br>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>Full Recipe</a> <div class='add-to-grocery-list'><img class='plus-sign' src='images/addTo.svg'>Add Ingredients to Grocery List</div></div>";
                 
             /* adding ingredients to grocery list */
             let currentGroceryItem = document.getElementsByClassName("add-to-grocery-list")[i];
@@ -67,7 +68,7 @@ $(document).ready(function(){
                 let bulletedList = "";
 
                 for (let i = 0; i < splitIngredientsList.length; i++) {
-                    bulletedList += "<div class='ingredient-list-entry'><span>&#8226; </span>" + splitIngredientsList[i] + "<input class='quantity-field' placeholder='QTY' type='text'><span class='remove-ingredient'>&times;<span></div>";
+                    bulletedList += "<div class='ingredient-list-entry'><span>&#8226; </span>" + splitIngredientsList[i] + "<input class='quantity-field' placeholder='QTY' type='text'><img class='remove-ingredient' src='images/xCloseButton.svg'></div>";
                 }
 
                 groceryListContainer.innerHTML += "<div class='grocery-list-entry'><strong>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>" + newAnswer.results[i].title + "</a>" + ":</strong><br>" + bulletedList + "<br><span class='remove-item'>remove item</span></div>";
