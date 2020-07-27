@@ -18,7 +18,7 @@ body {
 
 .tab-1 {
     width: 30%;
-    height: 7vw;
+    height: 5vw;
     border-top-left-radius: 3vw;
     border-top-right-radius: 3vw;
     font-size: 1.5vw;
@@ -31,7 +31,7 @@ body {
 
 .tab-2 {
     width: 18%;
-    height: 7vw;
+    height: 5vw;
     border-top-left-radius: 3vw;
     border-top-right-radius: 3vw;
     font-size: 1.5vw;
@@ -44,7 +44,7 @@ body {
 
 .tab-3 {
     width: 18%;
-    height: 7vw;
+    height: 5vw;
     border-top-left-radius: 3vw;
     border-top-right-radius: 3vw;
     font-size: 1.5vw;
@@ -198,8 +198,40 @@ box-shadow: 0px 8px 11px -1px rgba(230,136,28,1);
 }
 
 /* on grocery list page */
+.grocery-list-background {
+	background-color: #3756AF;
+	padding: 3rem;
+}
+
+/* on grocery list page */
+#exportPDF {
+	margin: 2vw 0vw;
+    height: 3vw;
+    border-radius: 2vw;
+    background-color: #d65528;
+    color: #fff;
+    font-size: 1.6vw;
+    font-family: calder-dark;
+    font-weight: 400;
+    padding: 0.4vw 1.25vw;
+    border: 0;
+    cursor: pointer;
+}
+
+/* on grocery list page */
 #groceryListContainer {
 	min-height: 100%;
+	background-color: white;
+	padding: 1rem;
+	-webkit-box-shadow: 0px 0px 11px 4px rgba(47,77,158,1);
+-moz-box-shadow: 0px 0px 11px 4px rgba(47,77,158,1);
+box-shadow: 0px 0px 11px 4px rgba(47,77,158,1);
+}
+
+/* food title/link on grocery list page */
+.grocery-list-entry strong, .grocery-list-entry a {
+    color: #5c82e8;
+    text-decoration: none;
 }
 
 /* on grocery list page */
@@ -210,11 +242,12 @@ box-shadow: 0px 8px 11px -1px rgba(230,136,28,1);
 /* on grocery list page */
 .ingredient-list-entry {
     display: block;
+    color: #58595b;
 }
 
 /* 'remove item' text under grocery items */
 .remove-item {
-	color: red;
+	color: #f18585;
 	display: inline-block;
 	margin-top: -1rem;
 	cursor: pointer;
@@ -301,6 +334,17 @@ box-shadow: 0px 8px 11px -1px rgba(230,136,28,1);
 	.food-image {
 		height: 7rem;
 	}
+	#exportPDF {
+		width: 100%;
+		margin: 0;
+		margin-top: 1.5rem;
+		margin-bottom: 1.5rem;
+		height: 10vw;
+		font-size: 2.5vw;
+	}
+	.grocery-list-background {
+		padding: 1rem;
+	}
 }
 
 @media screen and (max-width: 375px) {
@@ -318,7 +362,9 @@ box-shadow: 0px 8px 11px -1px rgba(230,136,28,1);
 	#groceryListContainer {
 		display: block;
 	}
-
+	#groceryListContainer {
+		box-shadow: none;
+	}
 	.remove-item {
 		display: none;
 	}
