@@ -348,25 +348,25 @@ div.resultView, div.resultRRView {
     margin : 0vw 1vw 0vw;
     padding : 1vw 1vw 0vw;
 } 
-.resultView a, .resultRRView a {
+.resultViewLink, .resultRRViewLink {
     font-size: 1.25vw;
+    float: left;
+    width : 72%;
+    height : auto;
+    color : #7090e8;
+    line-height: 1.75vw;
+    font-family : calder-dark-shadow;
+    font-weight : 400;
+    margin : 0vw 1vw 0vw;
+    padding : 0.3vw 1vw 0vw;
 }
 
-a:link {
-    color: #772001;
-}
-a:visited {
-    color: #759D59;
-}
-a:hover {
-    color: #d65528;
-}
 
 img.addToButton {
     float: left;
     width: 5vh;
     height: 5vh;
-    margin: 0.7vw 0.5vw 0vw 2vw;
+    margin: 0.2vw 0.5vw 0vw 2vw;
 }
 
 .addToGL {
@@ -374,8 +374,8 @@ img.addToButton {
     font-size: 1vw;
     font-family : calder-dark;
     font-weight : 400;
-    color: #d65528;
-    padding-top: 0.45vw;
+    color: #7090e8;
+    padding-top: 0.55vw;
 }
 
 img.addToButtonFR {
@@ -421,7 +421,6 @@ img.addToButtonFR {
     background-color: #759D59;
     display: block;
     padding-bottom: 3vw;
-    border: 1px solid #000;
 }
 
 #rrFullRecipe {

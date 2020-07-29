@@ -372,19 +372,19 @@ thirdHalfBar = document.getElementById("thirdHalfBar");
 sepBar = document.getElementById("sepBar");
 thirdSHalfBar = document.getElementById("thirdSHalfBar");
 
+RRList.addEventListener("click", function(){
+    recipeIndexPage(rrRecipeList);
+});
 
-RRList.addEventListener("click", recipeIndexPage);
-
-
-function recipeIndexPage(recipesInBoxes){
+function recipeIndexPage(list){
 
     rrIndex = document.getElementById("rrIndex");
     rrRecipeSnapshot = document.getElementById("rrRecipeSnapshot");
+    resultRRViewLink = document.getElementsByClassName("resultRRViewLink");
 
     let i = 0;
 
-    newRRlist = recipesInBoxes;
-    // console.log(newRRlist);
+    newRRlist = list;
 
     puppyResultsBox.style.display = "none";
     thirdHalfBar.style.display = "none";
@@ -395,7 +395,6 @@ function recipeIndexPage(recipesInBoxes){
 
     for(i = 0; i < newRRlist.length; i++){
 
-        console.log(newRRlist[i]);
         let ourListing = document.createElement("div");
         ourListing.style.color = "#759D59";
         ourListing.style.backgroundColor = "#fff";
@@ -407,19 +406,35 @@ function recipeIndexPage(recipesInBoxes){
         $(".imageRRFood").eq($(this).index()).css({
             "background-image": "url('" + newRRlist[i].recipePic + "')"
         });
-        ourListing.innerHTML += "<div class='resultRRView'>" + newRRlist[i].recipeName + "<br>" + "<a href='#" + newRRlist[i] + "' target='_blank'>Full Recipe</a> </div><img class='addToButton' alt='add ingredients to grocery list button' src='images/addTo.svg'><div class='addToGL'>Add ingredients</br>to grocery list</div>";
-        
-        ourListing.addEventListener("click", recipeStructure)
+
+        ourListing.innerHTML +=  "<div class='resultRRView'>" + newRRlist[i].recipeName;
+        let link = document.createElement("div");
+        link.innerHTML += 'Full Recipe';
+        link.classList.add('resultRRViewLink');
+        ourListing.appendChild(link);
+        ourListing.innerHTML += "<img class='addToButton' alt='add ingredients to grocery list button' src='images/addTo.svg'><div class='addToGL'>Add ingredients to grocery list</div></div>"
 
     }/* end of for loop */
 
+    let testyElement = document.getElementsByClassName("resultRRViewLink");
 
-    //ourListing.addEventListener("click", recipeStructure)
-    
-    
+    for(let i = 0;i < testyElement.length; i++){
+        testyElement[i].addEventListener("click", function(e){
+            console.log("tester");
+        })
 }
 
-recipeIndexPage(rrRecipeList)
+}
+
+//recipeIndexPage(rrRecipeList)
+
+// let testyElement = document.getElementsByClassName("resultRRViewLink");
+
+// for(let i = 0;i < testyElement.length; i++){
+//     testyElement[i].addEventListener("click", function(e){
+//         console.log("tester");
+//     })
+// }
 
 
 
@@ -440,7 +455,6 @@ let currentPage;
 
 
 function recipeStructure(justArecipe){
-
     currentPage = 0;
 
     let todo = justArecipe;
@@ -487,18 +501,12 @@ function recipeStructure(justArecipe){
         indyServesNum.classList.add("FullRecipeServesNum");
         if(justArecipe[i].servings){
             indyServesNum.innerHTML = justArecipe[i].servings;
-            console.log(indyServesNum[i]);
         } else {
             indyServesNum.style.display = "none";
-        }
+        };
 
-        let testyElement = document.getElementsByClassName("FullRecipePage");
 
-        for(let i = 0;i < testyElement.length; i++){
-            testyElement[i].addEventListener("click", function(e){
-                console.log("tester");
-            })
-        }
+
 
         let indyPrep = document.createElement("div");
         indyPrep.style.color = "#772001";
@@ -506,7 +514,6 @@ function recipeStructure(justArecipe){
         indyPrep.classList.add("FullRecipePrepTime");
         if(justArecipe[i].prepTime){
             indyPrep.innerHTML = justArecipe[i].prepTime;
-            console.log(indyPrep[i]);
         } else {
             indyPrep.style.display = "none";
         }
@@ -518,7 +525,6 @@ function recipeStructure(justArecipe){
         indyCook.classList.add("FullRecipeCookTime");
         if(justArecipe[i].cookTime){
             indyCook.innerHTML = justArecipe[i].cookTime;
-            console.log(indyCook[i]);
         } else {
             indyCook.style.display = "none";
         }
@@ -545,7 +551,6 @@ function recipeStructure(justArecipe){
         indyCalc.classList.add("FullRecipePerServing");
         if(justArecipe[i].perServing){
             indyCalc.innerHTML = justArecipe[i].perServing;
-            console.log(indyCalc[i]);
         } else {
             indyCalc.style.display = "none";
         }
@@ -556,7 +561,6 @@ function recipeStructure(justArecipe){
         indySource.classList.add("FullRecipeSource");
         if(justArecipe[i].recipeSource){
             indySource.innerHTML = justArecipe[i].recipeSource;
-            console.log(indySource[i]);
         } else {
             indySource.style.display = "none";
         }
@@ -569,33 +573,35 @@ function recipeStructure(justArecipe){
         let addIngredients = document.createElement("div");
         indyRecipe.append(addIngredients);
         addIngredients.innerHTML = "<div><img class='addToButtonFR' alt='add ingredients to grocery list button' src='images/addTo.svg'><div class='addToGLFR'>Add ingredients</br>to grocery list</div>"
-
-        
-
-        let keys = Object.keys(justArecipe[i]);       
-        let values = Object.values(justArecipe[i]);
-        console.log(keys);
-        console.log(values);
-        console.log(justArecipe[i].prepTime);
-        console.log(indyPrep, indyCook, indyCalc, indySource);
-
-
-
+    
     };
 
+    let fullRecipeLink = document.getElementsByClassName("resultRRViewLink");
+    for(let i = 0; i < fullRecipeLink.length; i++){
+            fullRecipeLink[i].addEventListener("click", function(){
+                displayRecipeSlide(i);
+            });
+    }
+    
     //////////////// R + R Full Recipe slider ///////////////
 
     FullRecipePage = document.getElementsByClassName("FullRecipePage");
 
     let currentSlide = 0;
 
-    function displayRecipeSlide(number) {
-     for(let iNum = 0; iNum < FullRecipePage.length; iNum++) {
-        FullRecipePage[iNum].style.display = "none"   
-     }
-     FullRecipePage[number].style.display = 'block'
-     }
+    function displayRecipeSlide(number) { 
+        rrRecipeBox.style.display = 'block'
+        rrIndex.style.display = 'none'
+        for(let i = 0; i<FullRecipePage.length; i++) {
+            if(number !== i) {
+                FullRecipePage[i].style.display = 'none'
+            } else {
+                FullRecipePage[i].style.display = 'block'
+            }    
+        }
+    }
 
+    
     goLeft = document.getElementById("goLeft");
     goRight = document.getElementById("goRight");
 
@@ -619,59 +625,18 @@ function recipeStructure(justArecipe){
         displayRecipeSlide(currentSlide);
     }
 
-    window.onload = displayRecipeSlide(currentSlide)
-    // want this to open after full recipe link is clicked
-    // but it is not correct yet
+    function hideAllRecipes() {
+        rrRecipeBox.style.display = 'none'
+    }
+
+    window.onload = hideAllRecipes()
     
+
 
     
 
 }
 recipeStructure(rrRecipeList)
 
-
-// indexLeftArrow.style.display = "block";
-// let subheads = document.getElementsByClassName("subheadSwop");
-// let sliderIndex = document.getElementsByClassName("sliderIndex");
-// let index = 0;
-
-// function displayTitle (number) {
-//  for(let i = 0; i<subheads.length;i++) {
-//    subheads[i].style.display = "none"   
-//  }
-//  subheads[number].style.display = 'block'
-// }
-
-// function displayGrid (number) {
-//  for(let i = 0; i<sliderIndex.length;i++) {
-//    sliderIndex[i].style.display = "none"   
-//  }
-//  sliderIndex[number].style.display = 'block'
-//  }
-
-// indexLeftArrow.addEventListener("click", goLeft);
-// indexRightArrow.addEventListener("click", goRight);
-
-// function goLeft(){
-//  index = index - 1;
-//  if(index < 0){
-//      index = subheads.length-1;
-//      index = sliderIndex.length-1;
-//  }
-//  displayTitle(index);
-//  displayGrid(index);
-// }
-
-// function goRight(){
-//  index = index + 1
-//  if (index > subheads.length-1 && sliderIndex.length-1){         
-//      index = 0;
-//  }
-// displayTitle(index);
-// displayGrid(index);
-// }
-
-// window.onload = displayTitle(index)
-// window.onload = displayGrid(index)
 
 
