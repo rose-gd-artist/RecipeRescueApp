@@ -313,7 +313,7 @@ $(document).ready(function(){
         }/* end of settings */
         
         $.ajax(settings).done(function (response) {
-            console.log(response);
+            // console.log(response);
             displayRecipes(response);
         });/* end of ajax fx */
 
@@ -322,10 +322,10 @@ $(document).ready(function(){
             let answer = searchedIngredients;
             answer;
             let newAnswer = JSON.parse(answer);
-            console.log(newAnswer);
+            // console.log(newAnswer);
 
             for(let i = 0; i < newAnswer.results.length; i++){
-                console.log(newAnswer.results[i].title)
+                // console.log(newAnswer.results[i].title)
                 let recipeListing = document.createElement("div");
                 recipeListing.style.color = "#F6921E";
                 recipeListing.style.backgroundColor = "#fff";
@@ -395,7 +395,7 @@ function recipeIndexPage(recipesInBoxes){
 
     for(i = 0; i < newRRlist.length; i++){
 
-        console.log(newRRlist[i]);
+        // console.log(newRRlist[i]);
         let ourListing = document.createElement("div");
         ourListing.style.color = "#759D59";
         ourListing.style.backgroundColor = "#fff";
@@ -407,9 +407,14 @@ function recipeIndexPage(recipesInBoxes){
         $(".imageRRFood").eq($(this).index()).css({
             "background-image": "url('" + newRRlist[i].recipePic + "')"
         });
-        ourListing.innerHTML += "<div class='resultRRView'>" + newRRlist[i].recipeName + "<br>" + "<a href='#" + newRRlist[i] + "' target='_blank'>Full Recipe</a> </div><img class='addToButton' alt='add ingredients to grocery list button' src='images/addTo.svg'><div class='addToGL'>Add ingredients</br>to grocery list</div>";
+
+        ourListing.innerHTML +=  newRRlist[i].recipeName;
+        let link = document.createElement("p")
+        link.innerHTML += 'full recipe';
+        link.classList.add('full-recipe-line')
+        ourListing.appendChild(link)
         
-        ourListing.addEventListener("click", recipeStructure)
+        // ourListing.addEventListener("click", recipeStructure)
 
     }/* end of for loop */
 
@@ -440,7 +445,6 @@ let currentPage;
 
 
 function recipeStructure(justArecipe){
-
     currentPage = 0;
 
     let todo = justArecipe;
@@ -460,7 +464,7 @@ function recipeStructure(justArecipe){
 
     /* Loop through all recipes and print the information for each one */
     for (let i = 0; i < justArecipe.length; i++) {
-        console.log(justArecipe[i]);  
+        // console.log(justArecipe[i]);  
         let indyRecipe = document.createElement("div");
         rrFullRecipe.append(indyRecipe);
         indyRecipe.classList.add("FullRecipePage"); 
@@ -487,18 +491,13 @@ function recipeStructure(justArecipe){
         indyServesNum.classList.add("FullRecipeServesNum");
         if(justArecipe[i].servings){
             indyServesNum.innerHTML = justArecipe[i].servings;
-            console.log(indyServesNum[i]);
+            // console.log(indyServesNum[i]);
         } else {
             indyServesNum.style.display = "none";
         }
 
-        let testyElement = document.getElementsByClassName("FullRecipePage");
+        
 
-        for(let i = 0;i < testyElement.length; i++){
-            testyElement[i].addEventListener("click", function(e){
-                console.log("tester");
-            })
-        }
 
         let indyPrep = document.createElement("div");
         indyPrep.style.color = "#772001";
@@ -506,7 +505,7 @@ function recipeStructure(justArecipe){
         indyPrep.classList.add("FullRecipePrepTime");
         if(justArecipe[i].prepTime){
             indyPrep.innerHTML = justArecipe[i].prepTime;
-            console.log(indyPrep[i]);
+            // console.log(indyPrep[i]);
         } else {
             indyPrep.style.display = "none";
         }
@@ -518,7 +517,7 @@ function recipeStructure(justArecipe){
         indyCook.classList.add("FullRecipeCookTime");
         if(justArecipe[i].cookTime){
             indyCook.innerHTML = justArecipe[i].cookTime;
-            console.log(indyCook[i]);
+            // console.log(indyCook[i]);
         } else {
             indyCook.style.display = "none";
         }
@@ -545,7 +544,7 @@ function recipeStructure(justArecipe){
         indyCalc.classList.add("FullRecipePerServing");
         if(justArecipe[i].perServing){
             indyCalc.innerHTML = justArecipe[i].perServing;
-            console.log(indyCalc[i]);
+            // console.log(indyCalc[i]);
         } else {
             indyCalc.style.display = "none";
         }
@@ -556,7 +555,7 @@ function recipeStructure(justArecipe){
         indySource.classList.add("FullRecipeSource");
         if(justArecipe[i].recipeSource){
             indySource.innerHTML = justArecipe[i].recipeSource;
-            console.log(indySource[i]);
+            // console.log(indySource[i]);
         } else {
             indySource.style.display = "none";
         }
@@ -574,14 +573,21 @@ function recipeStructure(justArecipe){
 
         let keys = Object.keys(justArecipe[i]);       
         let values = Object.values(justArecipe[i]);
-        console.log(keys);
-        console.log(values);
-        console.log(justArecipe[i].prepTime);
-        console.log(indyPrep, indyCook, indyCalc, indySource);
+        // console.log(keys);
+        // console.log(values);
+        // console.log(justArecipe[i].prepTime);
+        // console.log(indyPrep, indyCook, indyCalc, indySource);
 
 
 
     };
+
+    let fullRecipeLink = document.getElementsByClassName("full-recipe-line")
+    for(let i = 0;i < fullRecipeLink.length; i++){
+            fullRecipeLink[i].addEventListener("click", function(){
+                displayRecipeSlide(i);
+            })
+    }
 
     //////////////// R + R Full Recipe slider ///////////////
 
@@ -589,12 +595,18 @@ function recipeStructure(justArecipe){
 
     let currentSlide = 0;
 
-    function displayRecipeSlide(number) {
-     for(let iNum = 0; iNum < FullRecipePage.length; iNum++) {
-        FullRecipePage[iNum].style.display = "none"   
-     }
-     FullRecipePage[number].style.display = 'block'
-     }
+    function displayRecipeSlide(number) { 
+        rrRecipeBox.style.display = 'block'
+        rrIndex.style.display = 'none'
+        for(let i = 0; i<FullRecipePage.length; i++) {
+            if(number !== i) {
+                FullRecipePage[i].style.display = 'none'
+            } else {
+                FullRecipePage[i].style.display = 'block'
+            }    
+        }
+    }
+    
 
     goLeft = document.getElementById("goLeft");
     goRight = document.getElementById("goRight");
@@ -619,7 +631,11 @@ function recipeStructure(justArecipe){
         displayRecipeSlide(currentSlide);
     }
 
-    window.onload = displayRecipeSlide(currentSlide)
+    function hideAllRecipes() {
+        rrRecipeBox.style.display = 'none'
+    }
+
+    window.onload = hideAllRecipes()
     // want this to open after full recipe link is clicked
     // but it is not correct yet
     
