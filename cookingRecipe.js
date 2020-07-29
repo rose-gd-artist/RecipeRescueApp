@@ -1,137 +1,9 @@
-$(document).ready(function(){
-
-    /* page tabs */
-    let allTabs = document.getElementsByClassName("tab");
-    let activeButton = document.getElementsByClassName("activeButton");
-    let tabContents = document.getElementsByClassName("tab-content");
-    let tab2 = document.getElementsByClassName("tab-2");
-    rrIndex = document.getElementById("rrIndex");
-    rrRecipeSnapshot = document.getElementById("rrRecipeSnapshot");
-    resultRRViewLink = document.getElementsByClassName("resultRRViewLink");
-    rrRecipeBox = document.getElementById("rrRecipeBox");
-    rrFullRecipe = document.getElementById("rrFullRecipe");
-    RRList = document.getElementById("RRList");
-
-
-    for (let i = 0; i < allTabs.length; i++) {
-        allTabs[i].addEventListener("click", function () {
-            for (let i = 0; i < allTabs.length; i++) {
-                if(tab2){
-                    tabContents[i].classList.remove("active-tab");
-                    allTabs[i].classList.remove("activeButton");
-                    recipeIndexPage(rrRecipeList); //does not work properly
-
-                } else {
-                    tabContents[i].classList.remove("active-tab"); /* remove class from all tabs */
-                    allTabs[i].classList.remove("activeButton");
-                }
-            }
-            tabContents[i].classList.add("active-tab"); /* add class to current tab */
-            allTabs[i].classList.add("activeButton");
-        });
-    } /* end page tabs -- rosie trying to add recipeIndex() to rr tab */
-    
-  
-
-    let searchIngredients = document.getElementById("searchIngredients");
-    let searchFood = document.getElementById("searchFood");
-    let submit = document.getElementById("submit");
-    let resultsBox = document.getElementById("results");
-    let groceryListContainer = document.getElementById("groceryListContainer");
-
-    getRecipe(); /* preload some search results */
-
-    submit.addEventListener("click", getRecipe);
-
-    function getRecipe() {
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://recipe-puppy.p.rapidapi.com/?i=" + searchIngredients.value + "&q=" + searchFood.value,
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
-                "x-rapidapi-key":  recipePuppyAPI
-            }
-        }
-        
-        $.ajax(settings).done(function (response) {
-            displayRecipes(response);
-        }); 
-    } /* end of getRecipe fx */
-
-    function displayRecipes(searchedIngredients){
-        let answer = searchedIngredients;
-        let newAnswer = JSON.parse(answer);
-
-        resultsBox.innerHTML = ""; /* clear previous food result boxes */
-
-        for(let i = 0; i < newAnswer.results.length; i++){
-            let recipeListing = document.createElement("div");
-            recipeListing.classList.add("food-block");
-            recipeListing.innerHTML = "<div class='food-image'></div>";
-            resultsBox.append(recipeListing);
-            /* insert food background image ('background-size' property is set to 'cover' so each food image will be the same size) */
-            $(".food-image").eq($(this).index()).css({
-                "background-image": "url('" + newAnswer.results[i].thumbnail + "')"
-            });
-
-            /* insert food title, recipe link, and 'add to grocery list' button */
-            recipeListing.innerHTML += "<div class='food-title-and-link'><span class='food-title'>" + newAnswer.results[i].title + "</span><br>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>Full Recipe</a> <div class='add-to-grocery-list'><img class='plus-sign' src='images/addTo.svg'>Add Ingredients to Grocery List</div></div>";
-                
-            /* adding ingredients to grocery list */
-            let currentGroceryItem = document.getElementsByClassName("add-to-grocery-list")[i];
-
-            currentGroceryItem.addEventListener("click", function () {
-                /* split ingredients list returned from API and create bullets */
-                let splitIngredientsList = newAnswer.results[i].ingredients.split(",");
-                let bulletedList = "";
-
-                for (let i = 0; i < splitIngredientsList.length; i++) {
-                    bulletedList += "<div class='ingredient-list-entry'><span>&#8226; </span>" + splitIngredientsList[i] + "<input class='quantity-field' placeholder='QTY' type='text'><img class='remove-ingredient' src='images/xCloseButton.svg'></div>";
-                }
-
-                groceryListContainer.innerHTML += "<div class='grocery-list-entry'><strong>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>" + newAnswer.results[i].title + "</a>" + ":</strong><br>" + bulletedList + "<br><span class='remove-item'>remove item</span></div>";
-
-                /* removing items from a grocery list */
-                let removeItem = document.getElementsByClassName("remove-item");
-                removeItemOrIngredient (removeItem);
-
-                /* removing ingredients from a grocery list */
-                let removeIngredientItem = document.getElementsByClassName("remove-ingredient");
-                removeItemOrIngredient (removeIngredientItem);
-
-            }); /* end click event */
-        } /* end of for loop */
-    } /* end of displayRecipe fx */
-
-    /* function for removing grocery items or ingredients from the list */
-    function removeItemOrIngredient (itemToBeRemoved) {
-        for (let i = 0; i < itemToBeRemoved.length; i++) {
-            itemToBeRemoved[i].addEventListener("click", function () {
-                if (itemToBeRemoved[i].classList.contains("remove-ingredient")) {
-                    $('.ingredient-list-entry').eq(i).fadeOut(400); /* remove ingredient */
-                } else {
-                    $('.grocery-list-entry').eq(i).fadeOut(400); /* remove grocery item */
-                }
-            });
-        }
-    }
-
-    /* download/print PDF of grocery list (print settings specified in CSS print media query) */
-    let exportPDF = document.getElementById("exportPDF");
-
-    exportPDF.addEventListener("click", function () {
-        window.print();
-    });
-
-}) /* end of getRecipe fx */
-
-////////////////////////////////////////////////////////////
-
-/// rosie's js code ///////
-
-
+let search;
+let search2;
+let submit;
+let puppyResultsContent;
+let puppyResultsBox;
+let gList;
 let RRList;
 let welcomeBar;
 let secondBar;
@@ -142,19 +14,9 @@ let rrIndex;
 let rrRecipeSnapshot;
 let rrRecipeBox;
 let rrFullRecipe;
+let gListBox;
+let gListPage;
 let newRRlist;
-let FullRecipePage;
-let FullRecipeImage;
-let FullRecipeTitle;
-let FullRecipePrepTime;
-let FullRecipeCookTime;
-let FullRecipeIngredients;
-let FullRecipeDirections;
-let FullRecipePerServing;
-let FullRecipeSource;
-let goLeft;
-let goRight;
-let currentPage;
 
 let rrRecipeList = [
              
@@ -404,26 +266,115 @@ let rrRecipeList = [
             "<u>Per Serving:</u></br>&nbsp;&nbsp;&nbsp;72 calories (20% from fat),</br>&nbsp;&nbsp;&nbsp;12g carbohydrates, 2g protein,</br>&nbsp;&nbsp;&nbsp;1g fat, 0g fiber, 0g cholesterol,</br>&nbsp;&nbsp;&nbsp;139mg sodium",
     },
 
-]; // massive array of recipe objects
+];
+
 
 // degree fahrenheit code is     &#8457;  &#176; //
 
 
 
-////       Tom could you take a look at my code mixed into your code         ////
-//**************************************************************************/////
-////       this is the recipeIndexPage() - (I called it in line 22 and       ////
-////       is on line 428) that runs the R + R tab mini index boxes does     ////
-////       appear when the tab is clicked but the slider is shown at         ////
-////       the bottom of the page when it should not be visible and          ////
-////       the links in the index boxes don't work - i'm not sure how        ////
-////       to fix it - and it is supposed to activate the slider and         ////
-////       the index boxes should disappear using the recipeStructure()      ////
-////       on line 475 -- also could you figure out how to activate the      ////
-////       "add ingredients" buttons to the grocery and the on the R + R     ////
-////       Tab content. one more thing that i don't know why the index       ////
-////       boxes on the tab appear 3 times instead of just once (which       ////
-////       what I wanted)                                                    ////
+$(document).ready(function(){
+
+    search = document.getElementById("search");
+    search2 = document.getElementById("search2");
+    submit = document.getElementById("submit");
+    puppyResultsContent = document.getElementById("puppyResultsContent");
+    puppyResultsBox = document.getElementById("puppyResults");
+    gList = document.getElementById("gList");
+    RRList = document.getElementById("RRList");
+    rrIndex = document.getElementById("rrIndex");
+    rrRecipeSnapshot = document.getElementById("rrRecipeSnapshot");
+    rrRecipeBox = document.getElementById("rrRecipeBox");
+    rrFullRecipe = document.getElementById("rrFullRecipe");
+    gListBox = document.getElementById("gListBox");
+    gListPage = document.getElementById("gListPage");
+    welcomeBar = document.getElementById("welcomeBar");
+    secondBar = document.getElementById("secondBar");
+    thirdHalfBar = document.getElementById("thirdHalfBar");
+    sepBar = document.getElementById("sepBar");
+    thirdSHalfBar = document.getElementById("thirdSHalfBar");
+
+
+
+    submit.addEventListener("click", getRecipe);
+
+    function getRecipe(){
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            //"url": "https://recipe-puppy.p.rapidapi.com/?p=1&i=onions%252Cgarlic&q=omelet",
+            "url": "https://recipe-puppy.p.rapidapi.com/?i=" + search.value,
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
+                "x-rapidapi-key": "8fd4f85bddmsh92489d7ccb202dbp1eec27jsn251313e441a9"
+            }
+        }/* end of settings */
+        
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+            displayRecipes(response);
+        });/* end of ajax fx */
+
+        function displayRecipes(searchedIngredients){
+
+            let answer = searchedIngredients;
+            answer;
+            let newAnswer = JSON.parse(answer);
+            console.log(newAnswer);
+
+            for(let i = 0; i < newAnswer.results.length; i++){
+                console.log(newAnswer.results[i].title)
+                let recipeListing = document.createElement("div");
+                recipeListing.style.color = "#F6921E";
+                recipeListing.style.backgroundColor = "#fff";
+                puppyResultsContent.append(recipeListing);
+                recipeListing.classList.add("desktopView");
+
+                recipeListing.innerHTML = "<div class='imageFood'></div>";
+
+                $(".imageFood").eq($(this).index()).css({
+                    "background-image": "url('" + newAnswer.results[i].thumbnail + "')"
+                });
+                recipeListing.innerHTML += "<div class='resultView'>" + newAnswer.results[i].title + "<br>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>Full Recipe</a> </div><img class='addToButton' alt='add ingredients to grocery list button' src='images/addTo.svg'><div class='addToGL'>Add ingredients</br>to grocery list</div>";
+            
+            }/* end of for loop */
+
+
+        }/* end of displayRecipe fx */
+    
+
+
+
+
+    }/* end of getRecipe fx */
+
+})/* end of getRecipe fx */
+
+
+search = document.getElementById("search");
+search2 = document.getElementById("search2");
+submit = document.getElementById("submit");
+puppyResultsContent = document.getElementById("puppyResultsContent");
+puppyResultsBox = document.getElementById("puppyResults");
+rrIndex = document.getElementById("rrIndex");
+rrRecipeSnapshot = document.getElementById("rrRecipeSnapshot");
+rrRecipeBox = document.getElementById("rrRecipeBox");
+rrFullRecipe = document.getElementById("rrFullRecipe");
+gListBox = document.getElementById("gListBox");
+gListPage = document.getElementById("gListPage");
+gList = document.getElementById("gList");
+RRList = document.getElementById("RRList");
+welcomeBar = document.getElementById("welcomeBar");
+secondBar = document.getElementById("secondBar");
+thirdHalfBar = document.getElementById("thirdHalfBar");
+sepBar = document.getElementById("sepBar");
+thirdSHalfBar = document.getElementById("thirdSHalfBar");
+
+RRList.addEventListener("click", function(){
+    recipeIndexPage(rrRecipeList);
+});
 
 function recipeIndexPage(list){
 
@@ -435,9 +386,12 @@ function recipeIndexPage(list){
 
     newRRlist = list;
 
-    // thirdHalfBar.style.display = "none";
-    // sepBar.style.display = "none";
-    // thirdSHalfBar.style.display = "none";
+    puppyResultsBox.style.display = "none";
+    thirdHalfBar.style.display = "none";
+    sepBar.style.display = "none";
+    thirdSHalfBar.style.display = "none";
+    RRList.style.color = "fff";
+    welcomeBar.style.color = "#ff916b";
 
     for(i = 0; i < newRRlist.length; i++){
 
@@ -467,10 +421,38 @@ function recipeIndexPage(list){
     for(let i = 0;i < testyElement.length; i++){
         testyElement[i].addEventListener("click", function(e){
             console.log("tester");
-    })
+        })
 }
 
 }
+
+//recipeIndexPage(rrRecipeList)
+
+// let testyElement = document.getElementsByClassName("resultRRViewLink");
+
+// for(let i = 0;i < testyElement.length; i++){
+//     testyElement[i].addEventListener("click", function(e){
+//         console.log("tester");
+//     })
+// }
+
+
+
+let FullRecipePage;
+let FullRecipeImage;
+let FullRecipeTitle;
+let FullRecipePrepTime;
+let FullRecipeCookTime;
+let FullRecipeIngredients;
+let FullRecipeDirections;
+let FullRecipePerServing;
+let FullRecipeSource;
+let goLeft;
+let goRight;
+let currentPage;
+
+
+
 
 function recipeStructure(justArecipe){
     currentPage = 0;
@@ -523,6 +505,9 @@ function recipeStructure(justArecipe){
             indyServesNum.style.display = "none";
         };
 
+
+
+
         let indyPrep = document.createElement("div");
         indyPrep.style.color = "#772001";
         indyRecipe.append(indyPrep);
@@ -532,6 +517,7 @@ function recipeStructure(justArecipe){
         } else {
             indyPrep.style.display = "none";
         }
+
 
         let indyCook = document.createElement("div");
         indyCook.style.color = "#772001";
@@ -615,6 +601,7 @@ function recipeStructure(justArecipe){
         }
     }
 
+    
     goLeft = document.getElementById("goLeft");
     goRight = document.getElementById("goRight");
 
@@ -628,6 +615,7 @@ function recipeStructure(justArecipe){
         }
         displayRecipeSlide(currentSlide);
     }
+
 
     function goToTheRight(){
         currentSlide = currentSlide + 1
@@ -643,6 +631,12 @@ function recipeStructure(justArecipe){
 
     window.onload = hideAllRecipes()
     
-}
 
+
+    
+
+}
 recipeStructure(rrRecipeList)
+
+
+
