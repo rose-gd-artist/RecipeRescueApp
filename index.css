@@ -231,12 +231,12 @@ button {
 /* on grocery list page */
 .grocery-list-background {
 	background-color: #3756AF;
-	padding: 3rem;
+	padding-bottom: 3rem; 
 }
 
 /* on grocery list page */
 #exportPDF {
-	margin: 2vw 0vw;
+	margin: 7vw 0vw 2vw;
     height: 3vw;
     border-radius: 2vw;
     background-color: #d65528;
@@ -247,13 +247,20 @@ button {
     padding: 0.4vw 1.25vw;
     border: 0;
     cursor: pointer;
+    margin-right: 30%;
+    margin-left: 30%;
 }
 
 /* on grocery list page */
 #groceryListContainer {
+    width: 75%;
 	min-height: 100%;
 	background-color: white;
-	padding: 1rem;
+    padding: 4rem;
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+    margin-bottom: 3vw;
+
 	/* -webkit-box-shadow: 0px 0px 11px 4px rgba(47,77,158,1);
 -moz-box-shadow: 0px 0px 11px 4px rgba(47,77,158,1);
 box-shadow: 0px 0px 11px 4px rgba(47,77,158,1); */
@@ -263,17 +270,25 @@ box-shadow: 0px 0px 11px 4px rgba(47,77,158,1); */
 .grocery-list-entry strong, .grocery-list-entry a {
     color: #5c82e8;
     text-decoration: none;
+    font-size: 1.5vw;
+    line-height: 2vw;
+    font-family: calder-dark-shadow;
+    font-weight: 400;
 }
 
 /* on grocery list page */
 .grocery-list-entry {
-	margin-top: 1rem;
+    margin-top: 1rem;
 }
 
 /* on grocery list page */
 .ingredient-list-entry {
     display: block;
     color: #58595b;
+    font-size: 1.2vw;
+    line-height: 2.5vw;
+    font-family: calder-dark;
+    font-weight: 400;
 }
 
 /* 'remove item' text under grocery items */
@@ -281,7 +296,11 @@ box-shadow: 0px 0px 11px 4px rgba(47,77,158,1); */
 	color: #f18585;
 	display: inline-block;
 	margin-top: -1rem;
-	cursor: pointer;
+    cursor: pointer;
+    font-size: 1.2vw;
+    line-height: 2.5vw;
+    font-family: calder-dark;
+    font-weight: 400;
 }
 
 /* 'X' icon next to ingredient items */
@@ -862,7 +881,7 @@ div.FullRecipeImage {
 		display: none;
 	}
 
-	#groceryListContainer {
+	#groceryListContainer, .FullRecipePage, .FullRecipeImage {
 		display: block;
 	}
 	#groceryListContainer {
@@ -884,5 +903,8 @@ div.FullRecipeImage {
 	}
 	.grocery-list-entry {
 		margin-top: 1rem;
+    }
+    #goLeft, #goRight {
+		display: none;
 	}
 }
