@@ -45,7 +45,7 @@ $(document).ready(function(){
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
-                "x-rapidapi-key":   "8fd4f85bddmsh92489d7ccb202dbp1eec27jsn251313e441a9"
+                "x-rapidapi-key":   recipePuppyAP
             }
         }
         
@@ -619,7 +619,7 @@ function recipeStructure(justArecipe){
         let addIngredients = document.createElement("div");
         indyRecipe.append(addIngredients);
         addIngredients.innerHTML = "<div><img class='addToButtonFR' alt='add ingredients to grocery list button' src='images/addTo.svg'><div class='addToGLFR'>Add ingredients</br>to grocery list</div>"
-        
+
 
     };
 
