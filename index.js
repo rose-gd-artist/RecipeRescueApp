@@ -45,7 +45,7 @@ $(document).ready(function(){
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
-                "x-rapidapi-key":   "8fd4f85bddmsh92489d7ccb202dbp1eec27jsn251313e441a9"
+                "x-rapidapi-key":   recipePuppyAPI
             }
         }
         
@@ -406,23 +406,6 @@ let rrRecipeList = [
 ]; // massive array of recipe objects
 
 // degree fahrenheit code is     &#8457;  &#176; //
-
-
-
-////       Tom could you take a look at my code mixed into your code         ////
-//// *********************************************************************** ////
-////       this is the recipeIndexPage() - (I called it in line 22 and       ////
-////       is on line 428) that runs the R + R tab mini index boxes does     ////
-////       appear when the tab is clicked but the slider is shown at         ////
-////       the bottom of the page when it should not be visible and          ////
-////       the links in the index boxes don't work - i'm not sure how        ////
-////       to fix it - and it is supposed to activate the slider and         ////
-////       the index boxes should disappear using the recipeStructure()      ////
-////       on line 475 -- also could you figure out how to activate the      ////
-////       "add ingredients" buttons to the grocery and the on the R + R     ////
-////       Tab content. one more thing that i don't know why the index       ////
-////       boxes on the tab appear 3 times instead of just once (which       ////
-////       what I wanted)                                                    ////
 
 
 
