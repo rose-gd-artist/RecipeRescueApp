@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-    /* page tabs */
     let allTabs = document.getElementsByClassName("tab");
     let activeButton = document.getElementsByClassName("activeButton");
     let tabContents = document.getElementsByClassName("tab-content");
@@ -8,31 +7,26 @@ $(document).ready(function(){
     rrIndex = document.getElementById("rrIndex");
     rrRecipeSnapshot = document.getElementById("rrRecipeSnapshot");
     resultRRViewLink = document.getElementsByClassName("resultRRViewLink");
-    rrRecipeBox = document.getElementById("rrRecipeBox");
-    rrFullRecipe = document.getElementById("rrFullRecipe");
+    let rrFullRecipe = document.getElementById("rrFullRecipe");
     RRList = document.getElementById("RRList");
+    rrRecipeBox = document.getElementById("rrRecipeBox");
 
-
+    /* page tabs */
     for (let i = 0; i < allTabs.length; i++) {
         allTabs[i].addEventListener("click", function () {
             for (let i = 0; i < allTabs.length; i++) {
+                tabContents[i].classList.remove("active-tab");
                 if(tab2){
-                    tabContents[i].classList.remove("active-tab");
                     allTabs[i].classList.remove("activeButton");
-                    recipeIndexPage(rrRecipeList); //does not work properly
-
                 } else {
-                    tabContents[i].classList.remove("active-tab"); /* remove class from all tabs */
                     allTabs[i].classList.remove("activeButton");
                 }
             }
             tabContents[i].classList.add("active-tab"); /* add class to current tab */
             allTabs[i].classList.add("activeButton");
         });
-    } /* end page tabs -- rosie trying to add recipeIndex() to rr tab */
+    } /* end page tabs */
     
-  
-
     let searchIngredients = document.getElementById("searchIngredients");
     let searchFood = document.getElementById("searchFood");
     let submit = document.getElementById("submit");
@@ -121,9 +115,15 @@ $(document).ready(function(){
     /* download/print PDF of grocery list (print settings specified in CSS print media query) */
     let exportPDF = document.getElementById("exportPDF");
 
-    exportPDF.addEventListener("click", function () {
+    exportPDF.addEventListener("click", printPage);
+
+    /* function for printing the screen */
+    function printPage() {
         window.print();
-    });
+    }
+
+    /* function for 'R + R Recipes' tab */
+    recipeIndexPage(rrRecipeList);
 
 }) /* end of getRecipe fx */
 
@@ -140,8 +140,6 @@ let sepBar;
 let thirdSHalfBar;
 let rrIndex;
 let rrRecipeSnapshot;
-let rrRecipeBox;
-let rrFullRecipe;
 let newRRlist;
 let FullRecipePage;
 let FullRecipeImage;
@@ -423,7 +421,9 @@ let rrRecipeList = [
 ////       "add ingredients" buttons to the grocery and the on the R + R     ////
 ////       Tab content. one more thing that i don't know why the index       ////
 ////       boxes on the tab appear 3 times instead of just once (which       ////
-////       what I wanted)                                                    ////
+////       what I wanted)   
+
+                                                 ////
 
 function recipeIndexPage(list){
 
@@ -460,15 +460,54 @@ function recipeIndexPage(list){
         ourListing.appendChild(link);
         ourListing.innerHTML += "<img class='addToButton' alt='add ingredients to grocery list button' src='images/addTo.svg'><div class='addToGL'>Add ingredients to grocery list</div></div>"
 
-    }/* end of for loop */
+    } /* end of for loop */
 
-    let testyElement = document.getElementsByClassName("resultRRViewLink");
+    let fullRecipeLink = document.getElementsByClassName("resultRRViewLink");
+    for(let i = 0; i < fullRecipeLink.length; i++){
+            fullRecipeLink[i].addEventListener("click", function(){
+                displayRecipeSlide(i);
+            });
+    }
 
-    for(let i = 0;i < testyElement.length; i++){
-        testyElement[i].addEventListener("click", function(e){
-            console.log("tester");
-    })
-}
+    //////////////// R + R Full Recipe slider ///////////////
+
+    function displayRecipeSlide(number) { 
+        rrRecipeBox.style.display = 'block'
+        rrIndex.style.display = 'none'
+        for(let i = 0; i < FullRecipePage.length; i++) {
+            if(number !== i) {
+                FullRecipePage[i].style.display = 'none'
+            } else {
+                FullRecipePage[i].style.display = 'block'
+            }    
+        }
+    }
+
+    goLeft = document.getElementById("goLeft");
+    goRight = document.getElementById("goRight");
+
+    goLeft.addEventListener("click", goToTheLeft);
+    goRight.addEventListener("click", goToTheRight);
+
+    FullRecipePage = document.getElementsByClassName("FullRecipePage");
+
+    let currentSlide = 0;
+
+    function goToTheLeft(){
+        currentSlide = currentSlide - 1;
+        if(currentSlide < 0){
+            currentSlide = FullRecipePage.length-1;
+        }
+        displayRecipeSlide(currentSlide);
+    }
+
+    function goToTheRight(){
+        currentSlide = currentSlide + 1
+        if (currentSlide > FullRecipePage.length-1){         
+            currentSlide = 0;
+        }
+        displayRecipeSlide(currentSlide);
+    }
 
 }
 
@@ -590,59 +629,19 @@ function recipeStructure(justArecipe){
     
     };
 
-    let fullRecipeLink = document.getElementsByClassName("resultRRViewLink");
-    for(let i = 0; i < fullRecipeLink.length; i++){
-            fullRecipeLink[i].addEventListener("click", function(){
-                displayRecipeSlide(i);
-            });
-    }
-    
-    //////////////// R + R Full Recipe slider ///////////////
+    /* slider back button */
+    const backButton = document.getElementById("back-button");
 
-    FullRecipePage = document.getElementsByClassName("FullRecipePage");
+    backButton.addEventListener("click", function () {
+        rrRecipeBox.style.display = 'none';
+        rrIndex.style.display = 'block';
+    });
 
-    let currentSlide = 0;
-
-    function displayRecipeSlide(number) { 
-        rrRecipeBox.style.display = 'block'
-        rrIndex.style.display = 'none'
-        for(let i = 0; i<FullRecipePage.length; i++) {
-            if(number !== i) {
-                FullRecipePage[i].style.display = 'none'
-            } else {
-                FullRecipePage[i].style.display = 'block'
-            }    
-        }
-    }
-
-    goLeft = document.getElementById("goLeft");
-    goRight = document.getElementById("goRight");
-
-    goLeft.addEventListener("click", goToTheLeft);
-    goRight.addEventListener("click", goToTheRight);
-
-    function goToTheLeft(){
-        currentSlide = currentSlide - 1;
-        if(currentSlide < 0){
-            currentSlide = FullRecipePage.length-1;
-        }
-        displayRecipeSlide(currentSlide);
-    }
-
-    function goToTheRight(){
-        currentSlide = currentSlide + 1
-        if (currentSlide > FullRecipePage.length-1){         
-            currentSlide = 0;
-        }
-        displayRecipeSlide(currentSlide);
-    }
-
-    function hideAllRecipes() {
+    function hideAllRecipes() {    
         rrRecipeBox.style.display = 'none'
     }
 
-    window.onload = hideAllRecipes()
-    
+    window.onload = hideAllRecipes();  
 }
 
-recipeStructure(rrRecipeList)
+recipeStructure(rrRecipeList);
