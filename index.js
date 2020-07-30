@@ -45,7 +45,7 @@ $(document).ready(function(){
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
-                "x-rapidapi-key":  recipePuppyAPI
+                "x-rapidapi-key":   "8fd4f85bddmsh92489d7ccb202dbp1eec27jsn251313e441a9"
             }
         }
         
@@ -153,6 +153,7 @@ let FullRecipeSource;
 let goLeft;
 let goRight;
 let currentPage;
+let rrPDFbutton;
 
 let rrRecipeList = [
              
@@ -409,7 +410,7 @@ let rrRecipeList = [
 
 
 ////       Tom could you take a look at my code mixed into your code         ////
-//**************************************************************************/////
+//// *********************************************************************** ////
 ////       this is the recipeIndexPage() - (I called it in line 22 and       ////
 ////       is on line 428) that runs the R + R tab mini index boxes does     ////
 ////       appear when the tab is clicked but the slider is shown at         ////
@@ -421,9 +422,9 @@ let rrRecipeList = [
 ////       "add ingredients" buttons to the grocery and the on the R + R     ////
 ////       Tab content. one more thing that i don't know why the index       ////
 ////       boxes on the tab appear 3 times instead of just once (which       ////
-////       what I wanted)   
+////       what I wanted)                                                    ////
 
-                                                 ////
+
 
 function recipeIndexPage(list){
 
@@ -623,6 +624,15 @@ function recipeStructure(justArecipe){
         indyRecipe.append(pdfButton);
         pdfButton.classList.add("rrPDFbutton");
 
+        rrPDFbutton = document.getElementsByClassName("rrPDFbutton");
+
+        pdfButton.addEventListener("click", printPage);
+    
+        /* function for printing the screen */
+        function printPage() {
+            window.print();
+        }
+
         let addIngredients = document.createElement("div");
         indyRecipe.append(addIngredients);
         addIngredients.innerHTML = "<div><img class='addToButtonFR' alt='add ingredients to grocery list button' src='images/addTo.svg'><div class='addToGLFR'>Add ingredients</br>to grocery list</div>"
@@ -630,12 +640,14 @@ function recipeStructure(justArecipe){
     };
 
     /* slider back button */
-    const backButton = document.getElementById("back-button");
+    let backButton = document.getElementById("back-button");
 
-    backButton.addEventListener("click", function () {
+    backButton.addEventListener("click", goBack);
+        
+    function goBack() {
         rrRecipeBox.style.display = 'none';
         rrIndex.style.display = 'block';
-    });
+    }
 
     function hideAllRecipes() {    
         rrRecipeBox.style.display = 'none'

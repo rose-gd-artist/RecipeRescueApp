@@ -619,6 +619,19 @@ img.addToButtonFR {
     display: block;
 }
 
+div#back-button {
+    width: 4%;
+    height: 0vw;
+    margin-top: 4vw;
+    margin-left: 91vw;
+    display: inline-block;
+    opacity: 0.7;
+}
+
+div#back-button:hover {
+    opacity: 1;
+}
+
 #goLeft {
     float: left;
     width: 10%;
