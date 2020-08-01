@@ -31,7 +31,7 @@ $(document).ready(function(){
     let searchFood = document.getElementById("searchFood");
     let submit = document.getElementById("submit");
     let resultsBox = document.getElementById("results");
-    let groceryListContainer = document.getElementById("groceryListContainer");
+    groceryListContainer = document.getElementById("groceryListContainer");
 
     getRecipe(); /* preload some search results */
 
@@ -45,7 +45,7 @@ $(document).ready(function(){
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
-                "x-rapidapi-key":  recipePuppyAPI 
+                "x-rapidapi-key": "8fd4f85bddmsh92489d7ccb202dbp1eec27jsn251313e441a9"
             }
         }
         
@@ -65,11 +65,12 @@ $(document).ready(function(){
             recipeListing.classList.add("food-block");
             recipeListing.innerHTML = "<div class='food-image'></div>";
             resultsBox.append(recipeListing);
+
             /* insert food background image ('background-size' property is set to 'cover' so each food image will be the same size) */
             $(".food-image").eq($(this).index()).css({
                 "background-image": "url('" + newAnswer.results[i].thumbnail + "')"
             });
-
+    
             /* insert food title, recipe link, and 'add to grocery list' button */
             recipeListing.innerHTML += "<div class='food-title-and-link'><span class='food-title'>" + newAnswer.results[i].title + "</span><br>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>Full Recipe</a> <div class='add-to-grocery-list'><img class='plus-sign' src='images/addTo.svg'>Add Ingredients to Grocery List</div></div>";
                 
@@ -129,8 +130,6 @@ $(document).ready(function(){
 
 ////////////////////////////////////////////////////////////
 
-/// rosie's js code ///////
-
 
 let RRList;
 let welcomeBar;
@@ -154,7 +153,13 @@ let goLeft;
 let goRight;
 let currentPage;
 let rrPDFbutton;
+let currentGroceryItem;
+let removeItem;
+let removeIngredientItem;
+let groceryListContainer;
 
+
+/* massive array of R + R Recipe objects */
 let rrRecipeList = [
              
     { 
@@ -163,24 +168,24 @@ let rrRecipeList = [
     servings: "Serves 12-16",
     RRingredients: 
         ["<ul class='recipeI'><li class='recipeIHeader'><u>Ingredients:</u></li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;3 large sweet onions, sliced thin</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;3 tbsp Stonewall Kitchen Extra</br>&nbsp;&nbsp;&nbsp;Virgin Olive Oil</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;5 cups (42 oz.) beef broth</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/2 tsp salt</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/2 tsp pepper</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;3/4 cup Stonewall Kitchen Roasted</br>&nbsp;&nbsp;&nbsp;Onion Jam</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 loaf French bread cut into 1 inch</br>&nbsp;&nbsp;&nbsp;slices, toasted</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;4-6 oz Gruyere, Swiss or Provolone</br>&nbsp;&nbsp;&nbsp;cheese, grated</li></ul>"],
+        "<li class='recipeILines'>3 large sweet onions, sliced thin</li>",
+        "<li class='recipeILines'>3 tbsp Stonewall Kitchen Extra Virgin Olive Oil</li>",
+        "<li class='recipeILines'>5 cups (42 oz.) beef broth</li>",
+        "<li class='recipeILines'>1/2 tsp salt</li>",
+        "<li class='recipeILines'>1/2 tsp pepper</li>",
+        "<li class='recipeILines'>3/4 cup Stonewall Kitchen Roasted Onion Jam</li>",
+        "<li class='recipeILines'>1 loaf French bread cut into 1 inch slices, toasted</li>",
+        "<li class='recipeILines'>4-6 oz Gruyere, Swiss or Provolone cheese, grated</li></ul>"],
     directions: [
         "<ul class='recipeDir'><li class='recipeDHeader'><u>Directions:</u></li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;1. Over medium heat, warm oil in a</br>&nbsp;&nbsp;&nbsp;large stockpot or Dutch oven.</li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;2. Add onions and cook for 15</br>&nbsp;&nbsp;&nbsp;minutes, stirring occasionally,</br>&nbsp;&nbsp;&nbsp;until lightly browned.</li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;3. Reduce heat to low and let simmer,</br>&nbsp;&nbsp;&nbsp;stirring occasionally.</li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;4. Cook for 35-45 minutes until onions</br>&nbsp;&nbsp;&nbsp;are a deep golden brown.</li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;5. And Roasted Garlic Onion Jam,</br>&nbsp;&nbsp;&nbsp;broth, salt and pepper and bring to</br>&nbsp;&nbsp;&nbsp;boil. Reduce heat to low and simmer</br>&nbsp;&nbsp;&nbsp;for 20-25 minutes.</li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;6. Ladle soup into 4 heat proof</br>&nbsp;&nbsp;&nbsp;bowls. Top with toasted bread</br>&nbsp;&nbsp;&nbsp;slices and grated cheese.</li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;7. Broil 2-3 minutes until cheese is</br>&nbsp;&nbsp;&nbsp;bubbly and browned.</li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;8. Garnish, if desired, with fresh</br>&nbsp;&nbsp;&nbsp;chives, parsley or thyme.</li></ul>"],
+        "<li class='recipeDirLines'>1. Over medium heat, warm oil in a large stockpot or Dutch oven.</li>",
+        "<li class='recipeDirLines'>2. Add onions and cook for 15 minutes, stirring occasionally, until lightly browned.</li>",
+        "<li class='recipeDirLines'>3. Reduce heat to low and let simmer, stirring occasionally.</li>",
+        "<li class='recipeDirLines'>4. Cook for 35-45 minutes until  &nbsp;are a deep golden brown.</li>",
+        "<li class='recipeDirLines'>5. And Roasted Garlic Onion Jam, broth, salt and pepper and bring to boil. Reduce heat to low and simmer for 20-25 minutes.</li>",
+        "<li class='recipeDirLines'>6. Ladle soup into 4 heat proof bowls. Top with toasted bread slices and grated cheese.</li>",
+        "<li class='recipeDirLines'>7. Broil 2-3 minutes until cheese is bubbly and browned.</li>",
+        "<li class='recipeDirLines'>8. Garnish, if desired, with fresh chives, parsley or thyme.</li></ul>"],
     recipeSource: "<u>Source:</u> Stonewall Kitchen"
     },
 
@@ -192,24 +197,24 @@ let rrRecipeList = [
     cookTime: "<u>Cook Time:</u> 35 minutes",
     RRingredients:
         ["<ul class='recipeI'><li class='recipeIHeader'><u>Ingredients:</u></li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;3/4 cup Italian bread crumbs</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/2 cup flour</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/2 cup grated Parmesan cheese</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;8 boneless pork chops, cut 1/2 inch</br>&nbsp;&nbsp;&nbsp;thick</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/4 cup olive oil</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1-1/2 cups Marsala wine or apple</br>&nbsp;&nbsp;&nbsp;juice</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1-1/2 tbsp Butter</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 (8-oz.) pkg. sliced fresh mushrooms</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/4 cup chopped fresh Italian parsley</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;Freshly grated Parmesan cheese</br>&nbsp;&nbsp;&nbsp;(optional)</li></ul>"],
+        "<li class='recipeILines'>3/4 cup Italian bread crumbs</li>",
+        "<li class='recipeILines'>1/2 cup flour</li>",
+        "<li class='recipeILines'>1/2 cup grated Parmesan cheese</li>",
+        "<li class='recipeILines'>8 boneless pork chops, cut 1/2 inch</br>&nbsp;&nbsp;&nbsp;thick</li>",
+        "<li class='recipeILines'>1/4 cup olive oil</li>",
+        "<li class='recipeILines'>1-1/2 cups Marsala wine or apple</br>&nbsp;&nbsp;&nbsp;juice</li>",
+        "<li class='recipeILines'>1-1/2 tbsp Butter</li>",
+        "<li class='recipeILines'>2 (8-oz.) pkg. sliced fresh mushrooms</li>",
+        "<li class='recipeILines'>1/4 cup chopped fresh Italian parsley</li>",
+        "<li class='recipeILines'>Freshly grated Parmesan cheese</br>&nbsp;&nbsp;&nbsp;(optional)</li></ul>"],
     directions: [
         "<ul class='recipeDir'><li class='recipeDHeader'><u>Directions:</u></li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;1. Stir together bread crumbs, flour,</br>&nbsp;&nbsp;&nbsp;1/2 cup Parmesan cheese, and salt</br>&nbsp;&nbsp;&nbsp;and pepper to taste; dredge pork</br>&nbsp;&nbsp;&nbsp;chops in mixture.</li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;2. In a large skillet over medium-high</br>&nbsp;&nbsp;&nbsp;heat, brown pork chops in hot oil.</br>&nbsp;&nbsp;&nbsp;Cook in batches for 3 to 5 minutes</br>&nbsp;&nbsp;&nbsp;on each side or until done; reserve</br>&nbsp;&nbsp;&nbsp;drippings in skillet. Remove from</br>&nbsp;&nbsp;&nbsp;skillet; keep warm.</li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;3. Add wine and butter to skillet,</br>&nbsp;&nbsp;&nbsp;stirring to loosen browned</br>&nbsp;&nbsp;&nbsp;particles. Add mushrooms and bring</br>&nbsp;&nbsp;&nbsp;to a boil; reduce heat and simmer 15</br>&nbsp;&nbsp;&nbsp;minutes or until tender. Serve over</br>&nbsp;&nbsp;&nbsp;pork; sprinkle with parsley. Top with</br>&nbsp;&nbsp;&nbsp;freshly grated Parmesan cheese, if</br>&nbsp;&nbsp;&nbsp;desired.</li></ul>"
+        "<li class='recipeDirLines'>1. Stir together bread crumbs, flour, 1/2 cup Parmesan cheese, and salt and pepper to taste; dredge pork chops in mixture.</li>",
+        "<li class='recipeDirLines'>2. In a large skillet over medium-high heat, brown pork chops in hot oil. Cook in batches for 3 to 5 minutes on each side or until done; reserve drippings in skillet. Remove from skillet; keep warm.</li>",
+        "<li class='recipeDirLines'>3. Add wine and butter to skillet, stirring to loosen browned particles. Add mushrooms and bring to a boil; reduce heat and simmer 15 minutes or until tender. Serve over pork; sprinkle with parsley. Top with freshly grated Parmesan cheese, if desired.</li></ul>"
     ],
     perServing: [
-        "<u>Per Serving:</u></br>&nbsp;&nbsp;&nbsp;549 calories, 19g carbohydrates,</br>&nbsp;&nbsp;&nbsp;42g protein, 30g fat, 1g fiber,</br>&nbsp;&nbsp;&nbsp;122mg cholesterol, 454mg sodium"
+        "<u>Per Serving:</u></br>549 calories, 19g carbohydrates, 42g protein, 30g fat, 1g fiber, 122mg cholesterol, 454mg sodium"
     ],
     recipeSource: "<u>Source:</u> Shop Rite"
     },
@@ -221,22 +226,22 @@ let rrRecipeList = [
     cookTime: "<u>Cook Time:</u> 15 minutes",
     RRingredients:
         ["<ul class='recipeI'><li class='recipeIHeader'><u>Ingredients:</u></li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;4 boneless, skinless chicken breast</br>&nbsp;&nbsp;&nbsp;halves (about 5 oz each)</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/4 tsp salt</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/8 tsp pepper</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 tsp olive oil</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 bottle (8 oz) creamy Italian</br>&nbsp;&nbsp;&nbsp;dressing</li>",
-        "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 bag (16 oz) frozen stir-fry</br>&nbsp;&nbsp;&nbsp;vegetable blend</li>"
+        "<li class='recipeILines'>4 boneless, skinless chicken breast halves (about 5 oz each)</li>",
+        "<li class='recipeILines'>1/4 tsp salt</li>",
+        "<li class='recipeILines'>1/8 tsp pepper</li>",
+        "<li class='recipeILines'>2 tsp olive oil</li>",
+        "<li class='recipeILines'>1 bottle (8 oz) creamy Italian dressing</li>",
+        "<li class='recipeILines'>1 bag (16 oz) frozen stir-fry vegetable blend</li>"
         ],
     directions: [
         "<ul class='recipeDir'><li class='recipeDHeader'><u>Directions:</u></li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;1. Sprinkle chicken with salt and</br>&nbsp;&nbsp;&nbsp;pepper.</li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;2. Heat the oil in a large nonstick</br>&nbsp;&nbsp;&nbsp;skillet over medium-high heat. Add</br>&nbsp;&nbsp;&nbsp;Chicken; cook 2 minutes on each side,</br>&nbsp;&nbsp;&nbsp;or until golden.</li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;3. Pour dressing on chicken; turn to</br>&nbsp;&nbsp;&nbsp;coat. Cover, reduce heat and simmer</br>&nbsp;&nbsp;&nbsp;5 minutes.</li>",
-        "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;4. Add frozen vegetables, cover and</br>&nbsp;&nbsp;&nbsp;cook 5 minutes, or until chicken is</br>&nbsp;&nbsp;&nbsp;cooked through and vegetables are</br>&nbsp;&nbsp;&nbsp;crisp-tender.</li></ul>"
+        "<li class='recipeDirLines'>1. Sprinkle chicken with salt and pepper.</li>",
+        "<li class='recipeDirLines'>2. Heat the oil in a large nonstick skillet over medium-high heat. Add Chicken; cook 2 minutes on each side, or until golden.</li>",
+        "<li class='recipeDirLines'>3. Pour dressing on chicken; turn to coat. Cover, reduce heat and simmer 5 minutes.</li>",
+        "<li class='recipeDirLines'>4. Add frozen vegetables, cover and cook 5 minutes, or until chicken is cooked through and vegetables are crisp-tender.</li></ul>"
     ],
     perServing: [
-        "<u>Per Serving:</u></br>&nbsp;&nbsp;&nbsp;409 calories, 15g carbohydrates,</br>&nbsp;&nbsp;&nbsp;35g protein, 22g fat (3g sat fat),</br>&nbsp;&nbsp;&nbsp;3g fiber, 82mg cholesterol,</br>&nbsp;&nbsp;&nbsp;748mg sodium"
+        "<u>Per Serving:</u></br>409 calories, 15g carbohydrates, 35g protein, 22g fat (3g sat fat), 3g fiber, 82mg cholesterol, 748mg sodium"
     ],
     recipeSource: "<u>Source:</u> Women's Day"
     },
@@ -249,25 +254,25 @@ let rrRecipeList = [
         cookTime: "<u>Cook Time:</u> 10 minutes",
         RRingredients:
             ["<ul class='recipeI'><li class='recipeIHeader'><u>Ingredients:</u></li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 tsp pepper</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 tsp paprika</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 tsp garlic powder</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/2 tsp dried thyme</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/4 tsp salt</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 lb skirt steak, cut into 4 equal</br>&nbsp;&nbsp;&nbsp;pieces</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 tbsp oil</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1-1/3 cups milk</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 tsp dried sage</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2-2/3 cups frozen mashed potatoes</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/2 cup shredded cheddar</li></ul>"
+            "<li class='recipeILines'>1 tsp pepper</li>",
+            "<li class='recipeILines'>1 tsp paprika</li>",
+            "<li class='recipeILines'>1 tsp garlic powder</li>",
+            "<li class='recipeILines'>1/2 tsp dried thyme</li>",
+            "<li class='recipeILines'>1/4 tsp salt</li>",
+            "<li class='recipeILines'>1 lb skirt steak, cut into 4 equal pieces</li>",
+            "<li class='recipeILines'>1 tbsp oil</li>",
+            "<li class='recipeILines'>1-1/3 cups milk</li>",
+            "<li class='recipeILines'>1 tsp dried sage</li>",
+            "<li class='recipeILines'>2-2/3 cups frozen mashed potatoes</li>",
+            "<li class='recipeILines'>1/2 cup shredded cheddar</li></ul>"
             ],
         directions: [
             "<ul class='recipeDir'><li class='recipeDHeader'><u>Directions:</u></li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;1. Combine pepper, paprika, garlic</br>&nbsp;&nbsp;&nbsp;powder, thyme and salt. Rub mixture</br>&nbsp;&nbsp;&nbsp;on steak. Heat oil in large skillet</br>&nbsp;&nbsp;&nbsp;over high heat. Add steak; cook 2</br>&nbsp;&nbsp;&nbsp;minutes on each side for medium-</br>&nbsp;&nbsp;&nbsp;rare.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;2. Meanwhile, make Cheddar-sage</br>&nbsp;&nbsp;&nbsp;Potatoes: Heat milk and sage in a</br>&nbsp;&nbsp;&nbsp;medium saucepan over medium-high</br>&nbsp;&nbsp;&nbsp;heat. Stir in frozen potatoes and</br>&nbsp;&nbsp;&nbsp;cook, stirring occasionally. 4</br>&nbsp;&nbsp;&nbsp;minutes or until hot. Remove from</br>&nbsp;&nbsp;&nbsp;heat: stir in cheese.</li></ul>"
+            "<li class='recipeDirLines'>1. Combine pepper, paprika, garlicpowder, thyme and salt. Rub mixture on steak. Heat oil in large skillet over high heat. Add steak; cook 2 minutes on each side for medium-rare.</li>",
+            "<li class='recipeDirLines'>2. Meanwhile, make Cheddar-sage Potatoes: Heat milk and sage in a medium saucepan over medium-high heat. Stir in frozen potatoes and cook, stirring occasionally. 4 minutes or until hot. Remove from heat: stir in cheese.</li></ul>"
         ],
         perServing: [
-            "<u>Per Serving:</u></br>&nbsp;&nbsp;&nbsp;475 calories, 25g carbohydrates,</br>&nbsp;&nbsp;&nbsp;30g protein, 27g fat (11g sat fat),</br>&nbsp;&nbsp;&nbsp;2g fiber, 94mg cholesterol,</br>&nbsp;&nbsp;&nbsp;714mg sodium"
+            "<u>Per Serving:</u></br>475 calories, 25g carbohydrates,30g protein, 27g fat (11g sat fat), 2g fiber, 94mg cholesterol, 714mg sodium"
         ],
         recipeSource: "<u>Source:</u> Women's Day"
     },
@@ -278,29 +283,29 @@ let rrRecipeList = [
         cookTime: "<u>Bake Time:</u> 10-12 minutes",
         RRingredients:
             ["<ul class='recipeI'><li class='recipeIHeader'><u>Ingredients:</u></li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/2 lb (2 sticks) Softened Butter</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 cup firmly packed brown sugar</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/2 cup granulated sugar</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 eggs</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 tsp vanilla</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1-1/2 cups All-purpose flour</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 tsp baking soda</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 tsp ground cinnamon</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/2 tsp salt</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;3 cups Quaker Oats</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 cup raisins</li></ul>"
+            "<li class='recipeILines'>1/2 lb (2 sticks) Softened Butter</li>",
+            "<li class='recipeILines'>1 cup firmly packed brown sugar</li>",
+            "<li class='recipeILines'>1/2 cup granulated sugar</li>",
+            "<li class='recipeILines'>2 eggs</li>",
+            "<li class='recipeILines'>1 tsp vanilla</li>",
+            "<li class='recipeILines'>1-1/2 cups All-purpose flour</li>",
+            "<li class='recipeILines'>1 tsp baking soda</li>",
+            "<li class='recipeILines'>1 tsp ground cinnamon</li>",
+            "<li class='recipeILines'>1/2 tsp salt</li>",
+            "<li class='recipeILines'>3 cups Quaker Oats</li>",
+            "<li class='recipeILines'>1 cup raisins</li></ul>"
             ],
         directions: [
             "<ul class='recipeDir'><li class='recipeDHeader'><u>Directions:</u></li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;1. Mix butter and sugar.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;2. Add eggs and vanilla.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;3. Beat well in mixer.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;4. Add flour, baking soda,</br>&nbsp;&nbsp;&nbsp;cinnamon and salt.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;5. Beat well in mixer.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;6. Add oats and raisins.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;7. Place spoon size balls of</br>&nbsp;&nbsp;&nbsp;dough on cookie sheet.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;8. Cook in oven for 10-12 minutes</br>&nbsp;&nbsp;&nbsp;at 350&#176;F.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;9. Let cool for 1 minute before</br>&nbsp;&nbsp;&nbsp;serving.</li></ul>"
+            "<li class='recipeDirLines'>1. Mix butter and sugar.</li>",
+            "<li class='recipeDirLines'>2. Add eggs and vanilla.</li>",
+            "<li class='recipeDirLines'>3. Beat well in mixer.</li>",
+            "<li class='recipeDirLines'>4. Add flour, baking soda, cinnamon and salt.</li>",
+            "<li class='recipeDirLines'>5. Beat well in mixer.</li>",
+            "<li class='recipeDirLines'>6. Add oats and raisins.</li>",
+            "<li class='recipeDirLines'>7. Place spoon size balls of dough on cookie sheet.</li>",
+            "<li class='recipeDirLines'>8. Cook in oven for 10-12 minutes at 350&#176;F.</li>",
+            "<li class='recipeDirLines'>9. Let cool for 1 minute before serving.</li></ul>"
         ],
         recipeSource: "<u>Source:</u> Quaker Oats"
     },
@@ -311,34 +316,34 @@ let rrRecipeList = [
         servings: "Serves 6-8",
         RRingredients:
             ["<ul class='recipeI'><li class='recipeIHeader'><u>Ingredients:</u></li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;6 oz thick-cut bacon, diced</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;3-1/2 - 4 lb chuck roast,</br>&nbsp;&nbsp;&nbsp;cut into 1 inch cubes</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;Kosher salt</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;Freshly ground pepper</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 small onions, diced</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 carrots, peeled and diced</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 celery stalks, diced</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;3 garlic cloves, minced</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 tbsp tomato paste</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;3/4 lb cremini mushrooms, sliced</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 tbsp veal demi-glace</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;3 tbsp Dijon Mustard</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1-1/2 cups beef broth</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/4 cup finely chopped fresh flat</br>&nbsp;&nbsp;&nbsp;leaf parsley</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;Creme fraiche mashed potatoes</li></ul>"
+            "<li class='recipeILines'>6 oz thick-cut bacon, diced</li>",
+            "<li class='recipeILines'>3-1/2 - 4 lb chuck roast, cut into 1 inch cubes</li>",
+            "<li class='recipeILines'>Kosher salt</li>",
+            "<li class='recipeILines'>Freshly ground pepper</li>",
+            "<li class='recipeILines'>2 small onions, diced</li>",
+            "<li class='recipeILines'>2 carrots, peeled and diced</li>",
+            "<li class='recipeILines'>2 celery stalks, diced</li>",
+            "<li class='recipeILines'>3 garlic cloves, minced</li>",
+            "<li class='recipeILines'>1 tbsp tomato paste</li>",
+            "<li class='recipeILines'>3/4 lb cremini mushrooms, sliced</li>",
+            "<li class='recipeILines'>1 tbsp veal demi-glace</li>",
+            "<li class='recipeILines'>3 tbsp Dijon Mustard</li>",
+            "<li class='recipeILines'>1-1/2 cups beef broth</li>",
+            "<li class='recipeILines'>1/4 cup finely chopped fresh flat leaf parsley</li>",
+            "<li class='recipeILines'>Creme fraiche mashed potatoes</li></ul>"
             ],
         directions: [
             "<ul class='recipeDir'><li class='recipeDHeader'><u>Directions:</u></li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;1. In a stovetop-safe insert of slow</br>&nbsp;&nbsp;&nbsp;cooker over medium-high heat, cook</br>&nbsp;&nbsp;&nbsp;bacon 10-11 minutes.</li>", 
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;2. Drain on paper towels. Pour</br>&nbsp;&nbsp;&nbsp;Bacon fat into a bowl.</li>", 
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;3. Season beef with salt and pepper.</br>&nbsp;&nbsp;&nbsp;Return insert to medium-high heat;</br>&nbsp;&nbsp;&nbsp;warm 2 Tbsp bacon fat. Brown beef</br>&nbsp;&nbsp;&nbsp;in batches 8-10 minutes; transfer</br>&nbsp;&nbsp;&nbsp;to bowl.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;4. Reduce heat to medium; warm 1 Tbsp</br>&nbsp;&nbsp;&nbsp;bacon fat. Cook onions, carrots and</br>&nbsp;&nbsp;&nbsp;celery 10 minutes.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;5. Add garlic and tomato paste;</br>&nbsp;&nbsp;&nbsp;cook 1 minute.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;6. Add mushrooms, saute 10-12</br>&nbsp;&nbsp;&nbsp;minutes.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;7. Stir in demi-glace, mustard, beef,</br>&nbsp;&nbsp;&nbsp;bacon, broth, salt and pepper.</li>",     
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;8. Bring to simmer; transfer insert</br>&nbsp;&nbsp;&nbsp;to slow-cooker base. Cover and</br>&nbsp;&nbsp;&nbsp;cook on high 4 hours.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;9. Skim off fat. Stir in parsley.</li>", 
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;10. Serve with creme fraiche</br>&nbsp;&nbsp;&nbsp;mashed potatoes.</li></ul>"
+            "<li class='recipeDirLines'>1. In a stovetop-safe insert of slow cooker over medium-high heat, cook bacon 10-11 minutes.</li>", 
+            "<li class='recipeDirLines'>2. Drain on paper towels. Pour Bacon fat into a bowl.</li>", 
+            "<li class='recipeDirLines'>3. Season beef with salt and pepper. Return insert to medium-high heat; warm 2 Tbsp bacon fat. Brown beef in batches 8-10 minutes; transfer to bowl.</li>",
+            "<li class='recipeDirLines'>4. Reduce heat to medium; warm 1 Tbsp bacon fat. Cook onions, carrots and celery 10 minutes.</li>",
+            "<li class='recipeDirLines'>5. Add garlic and tomato paste; cook 1 minute.</li>",
+            "<li class='recipeDirLines'>6. Add mushrooms, saute 10-12 minutes.</li>",
+            "<li class='recipeDirLines'>7. Stir in demi-glace, mustard, beef, bacon, broth, salt and pepper.</li>",     
+            "<li class='recipeDirLines'>8. Bring to simmer; transfer insert to slow-cooker base. Cover and cook on high 4 hours.</li>",
+            "<li class='recipeDirLines'>9. Skim off fat. Stir in parsley.</li>", 
+            "<li class='recipeDirLines'>10. Serve with creme fraiche mashed potatoes.</li></ul>"
         ],
     },
 
@@ -360,19 +365,19 @@ let rrRecipeList = [
             "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2/3 cup chopped tomatoes</li>",
             "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 tbsp fresh lime juice</li>",
             "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;8 flour tortillas (8-inch)</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 cups shredded Monterey Jack</br>&nbsp;&nbsp;&nbsp;cheese with jalapenos (8 oz)</li>",
+            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 cups shredded Monterey Jack cheese with jalapenos (8 oz)</li>",
             "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;Salsa, sour cream (optional)</li></ul>"
             ],
         directions: [
             "<ul class='recipeDir'><li class='recipeDHeader'><u>Directions:</u></li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;1. Combine flour, cumin, chili powder</br>&nbsp;&nbsp;&nbsp;and cayenne in a pie plate. Dip fillets</br>&nbsp;&nbsp;&nbsp;in eggs, then coat in flour mixture.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;2. In a large skillet, saute fillets in</br>&nbsp;&nbsp;&nbsp;hot oil over medium-high heat 4 to 6</br>&nbsp;&nbsp;&nbsp;minutes per side or until fish flakes</br>&nbsp;&nbsp;&nbsp;easily with a fork. Drain on paper</br>&nbsp;&nbsp;&nbsp;towels; flake fish.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;3. Combine fish, tomatoes and lime</br>&nbsp;&nbsp;&nbsp;juice in a medium bowl. Place fish</br>&nbsp;&nbsp;&nbsp;mixture on the center of each</br>&nbsp;&nbsp;&nbsp;tortilla; sprinkle with cheese.</br>&nbsp;&nbsp;&nbsp;Fold tortilla over to completely</br>&nbsp;&nbsp;&nbsp;enclose filling.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;4. Coat a large skillet with nonstick</br>&nbsp;&nbsp;&nbsp;cooking spray. Cook 1 or 2</br>&nbsp;&nbsp;&nbsp;quesadillas at time on medium-high</br>&nbsp;&nbsp;&nbsp;heat 2 to 3 minutes per side until</br>&nbsp;&nbsp;&nbsp;crisp and lightly browned.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;5. Cut each quesadilla into thirds.</br>&nbsp;&nbsp;&nbsp;Serve warm with salsa and sour</br>&nbsp;&nbsp;&nbsp;cream, if desired.</li></ul>"
+            "<li class='recipeDirLines'>1. Combine flour, cumin, chili powderand cayenne in a pie plate. Dip fillets in eggs, then coat in flour mixture.</li>",
+            "<li class='recipeDirLines'>2. In a large skillet, saute fillets inhot oil over medium-high heat 4 to 6 minutes per side or until fish flakes easily with a fork. Drain on paper towels; flake fish.</li>",
+            "<li class='recipeDirLines'>3. Combine fish, tomatoes and lime juice in a medium bowl. Place fish mixture on the center of each tortilla; sprinkle with cheese. Fold tortilla over to completely enclose filling.</li>",
+            "<li class='recipeDirLines'>4. Coat a large skillet with nonstick cooking spray. Cook 1 or 2 quesadillas at time on medium-high heat 2 to 3 minutes per side until crisp and lightly browned.</li>",
+            "<li class='recipeDirLines'>5. Cut each quesadilla into thirds. Serve warm with salsa and sour cream, if desired.</li></ul>"
         ],
         perServing: [
-            "<u>Per Serving:</u></br>&nbsp;&nbsp;&nbsp;675 calories, 37g carbohydrates,</br>&nbsp;&nbsp;&nbsp;77g protein, 24g fat (8g sat fat),</br>&nbsp;&nbsp;&nbsp;1g fiber, 140mg cholesterol,</br>&nbsp;&nbsp;&nbsp;665mg sodium, 0g omega3"
+            "<u>Per Serving:</u></br>675 calories, 37g carbohydrates,77g protein, 24g fat (8g sat fat),1g fiber, 140mg cholesterol,</br>&nbsp;&nbsp;&nbsp;665mg sodium, 0g omega3"
         ]
     },
 
@@ -385,73 +390,55 @@ let rrRecipeList = [
         cookTime: "<u>Cook Time:</u> 10-15 minutes",
         RRingredients:
             ["<ul class='recipeI'><li class='recipeIHeader'><u>Ingredients:</u></li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 cloves garlic, minced</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 tsp chopped fresh parsley</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 tsp dried thyme</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;3/4 tsp dried marjoram</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/2 tsp paprika</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 small loaves (4 oz) Italian or</br>&nbsp;&nbsp;&nbsp;French bread</li></ul>"
+            "<li class='recipeILines'>2 cloves garlic, minced</li>",
+            "<li class='recipeILines'>1 tsp chopped fresh parsley</li>",
+            "<li class='recipeILines'>2 tsp dried thyme</li>",
+            "<li class='recipeILines'>3/4 tsp dried marjoram</li>",
+            "<li class='recipeILines'>1/2 tsp paprika</li>",
+            "<li class='recipeILines'>2 small loaves (4 oz) Italian or French bread</li></ul>"
             ],
         directions: [
             "<ul class='recipeDir'><li class='recipeDHeader'><u>Directions:</u></li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;1. Preheat oven to 350&#176;F. In a small</br>&nbsp;&nbsp;&nbsp;bowl, combine the garlic an oil;</br>&nbsp;&nbsp;&nbsp;mix well.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;2. In another small bowl, combine</br>&nbsp;&nbsp;&nbsp;parsley, thyme, marjoram and</br>&nbsp;&nbsp;&nbsp;paprika. Add Parmesan; mix well.</li>",      
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;3. Cut each loaf crosswise into</br>&nbsp;&nbsp;&nbsp;diagonal slices, without cutting</br>&nbsp;&nbsp;&nbsp;all the way through. Brush cut</br>&nbsp;&nbsp;&nbsp;sides of slices with garlic oil.</br>&nbsp;&nbsp;&nbsp;Sprinkle herb mixture between</br>&nbsp;&nbsp;&nbsp;slices. Wrap each loaf in foil;</br>&nbsp;&nbsp;&nbsp;place on a baking sheet.</li>",
-            "<li class='recipeDirLines'>&nbsp;&nbsp;&nbsp;4. Bake until heated through,</br>&nbsp;&nbsp;&nbsp;about 10-15 minutes. Unwrap loaves</br>&nbsp;&nbsp;&nbsp;and place them on a bread board</br>&nbsp;&nbsp;&nbsp;or in a basket. Serve Immediately.</li></ul>"
+            "<li class='recipeDirLines'>1. Preheat oven to 350&#176;F. In a small bowl, combine the garlic an oil; mix well.</li>",
+            "<li class='recipeDirLines'>2. In another small bowl, combine parsley, thyme, marjoram and paprika. Add Parmesan; mix well.</li>",      
+            "<li class='recipeDirLines'>3. Cut each loaf crosswise into diagonal slices, without cutting all the way through. Brush cut sides of slices with garlic oil. Sprinkle herb mixture between slices. Wrap each loaf in foil place on a baking sheet.</li>",
+            "<li class='recipeDirLines'>4. Bake until heated through, about 10-15 minutes. Unwrap loaves and place them on a bread board or in a basket. Serve Immediately.</li></ul>"
         ],
         perServing: 
-            "<u>Per Serving:</u></br>&nbsp;&nbsp;&nbsp;72 calories (20% from fat),</br>&nbsp;&nbsp;&nbsp;12g carbohydrates, 2g protein,</br>&nbsp;&nbsp;&nbsp;1g fat, 0g fiber, 0g cholesterol,</br>&nbsp;&nbsp;&nbsp;139mg sodium",
-    },
+            "<u>Per Serving:</u></br> 72 calories (20% from fat), 12g carbohydrates, 2g protein, 1g fat, 0g fiber, 0g cholesterol, 139mg sodium",
+    }
 
-]; // massive array of recipe objects
-
-// degree fahrenheit code is     &#8457;  &#176; //
-
-
+]; 
 
 function recipeIndexPage(list){
 
-    rrIndex = document.getElementById("rrIndex");
-    rrRecipeSnapshot = document.getElementById("rrRecipeSnapshot");
-    resultRRViewLink = document.getElementsByClassName("resultRRViewLink");
-
-    let i = 0;
-
     newRRlist = list;
 
-    // thirdHalfBar.style.display = "none";
-    // sepBar.style.display = "none";
-    // thirdSHalfBar.style.display = "none";
-
-    for(i = 0; i < newRRlist.length; i++){
-
+    for(let i = 0; i < newRRlist.length; i++){
         let ourListing = document.createElement("div");
-        ourListing.style.color = "#759D59";
-        ourListing.style.backgroundColor = "#fff";
-        rrRecipeSnapshot.append(ourListing);
-        ourListing.classList.add("desktopRRView");
+        ourListing.classList.add("food-block2");
+        ourListing.innerHTML = "<div class='food-image2'></div>";
+        rrIndex.append(ourListing);
 
-        ourListing.innerHTML = "<div class='imageRRFood'></div>";
-
-        $(".imageRRFood").eq($(this).index()).css({
+        /* insert food background image ('background-size' property is set to 'cover' so each food image will be the same size) */
+        $(".food-image2").eq($(this).index()).css({
             "background-image": "url('" + newRRlist[i].recipePic + "')"
         });
 
-        ourListing.innerHTML +=  "<div class='resultRRView'>" + newRRlist[i].recipeName;
-        let link = document.createElement("div");
-        link.innerHTML += 'Full Recipe';
-        link.classList.add('resultRRViewLink');
-        ourListing.appendChild(link);
-        ourListing.innerHTML += "<img class='addToButton' alt='add ingredients to grocery list button' src='images/addTo.svg'><div class='addToGL'>Add ingredients to grocery list</div></div>"
-
-    } /* end of for loop */
-
-    let fullRecipeLink = document.getElementsByClassName("resultRRViewLink");
-    for(let i = 0; i < fullRecipeLink.length; i++){
-            fullRecipeLink[i].addEventListener("click", function(){
-                displayRecipeSlide(i);
-            });
+        /* insert food title, recipe link, and 'add to grocery list' button */
+        ourListing.innerHTML +=  "<div class='food-title-and-link2'><span class='food-title2'>" + newRRlist[i].recipeName + "</span><br><span class='recipeBookmark'>Full Recipe</span></div>";
+        
     }
+            
+    let fullRecipeLink = document.getElementsByClassName("recipeBookmark");
+
+    for(let i = 0; i < fullRecipeLink.length; i++){
+        fullRecipeLink[i].addEventListener("click", function(){
+            displayRecipeSlide(i);
+        });
+    }
+
+    
 
     //////////////// R + R Full Recipe slider ///////////////
 
@@ -606,19 +593,13 @@ function recipeStructure(justArecipe){
         pdfButton.innerHTML = "Export / Print PDF";
         indyRecipe.append(pdfButton);
         pdfButton.classList.add("rrPDFbutton");
-
         rrPDFbutton = document.getElementsByClassName("rrPDFbutton");
-
         pdfButton.addEventListener("click", printPage);
     
         /* function for printing the screen */
         function printPage() {
             window.print();
         }
-
-        let addIngredients = document.createElement("div");
-        indyRecipe.append(addIngredients);
-        addIngredients.innerHTML = "<div><img class='addToButtonFR' alt='add ingredients to grocery list button' src='images/addTo.svg'><div class='addToGLFR'>Add ingredients</br>to grocery list</div>"
 
 
     };
@@ -630,7 +611,7 @@ function recipeStructure(justArecipe){
         
     function goBack() {
         rrRecipeBox.style.display = 'none';
-        rrIndex.style.display = 'block';
+        rrIndex.style.display = 'flex';
     }
 
     function hideAllRecipes() {    
@@ -640,7 +621,6 @@ function recipeStructure(justArecipe){
     window.onload = hideAllRecipes();  
 }
 
-recipeStructure(rrRecipeList);
+recipeStructure(rrRecipeList)
 
-/* adding ingredients to grocery list */
 

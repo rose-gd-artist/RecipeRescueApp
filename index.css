@@ -88,18 +88,14 @@ button {
 	display: block;
 }
 
-
 .activeButton {
-	color: #fff; /* added R -- but isn't working - I want the active tab to have white text  */
+	color: #fff;
 }
 
 .search-bar-container {
 	display: flex;
     position: relative;
-	background-color: #F6921E;
-    /* -webkit-box-shadow: 0px 8px 11px -1px rgba(230,136,28,1);  /* commented out R */
-	/*-moz-box-shadow: 0px 8px 11px -1px rgba(230,136,28,1);  /* commented out R */
-	/*box-shadow: 0px 8px 11px -1px rgba(230,136,28,1); */  /* commented out R */
+    background-color: #F6921E;
 }
 
 #searchIngredients, #searchFood {
@@ -107,7 +103,6 @@ button {
     height: 3vw;
     border-radius: 2vw;
     background-color: #fff;
-    color: #759D59;
     font-size: 1.3vw;
     font-family: calder-dark-shadow;
     font-weight: 400;
@@ -115,7 +110,6 @@ button {
     border-color: transparent;
     padding-left: 1vw;
     padding-right: 1vw;
-
 }
 
 /* search field 1 */
@@ -130,6 +124,10 @@ button {
 
 ::placeholder {
 	color: #bfbfbf;
+}
+
+input {
+    color: #555;
 }
 
 #submit {
@@ -150,7 +148,7 @@ button {
 	padding-top: 1rem;
 	background-color: #F6921E;
 	min-height: 100%;
-	margin-bottom: 3rem; /* added R */
+	margin-bottom: 3rem;
 }
 
 /* results container where data is displayed */
@@ -162,65 +160,68 @@ button {
 }
 
 /* recipe blocks that are generated */
-.food-block {
+.food-block, .food-block2 {
 	display: flex;
-	width: 40%;
+	width: 47%;
 	margin: 1rem;
     align-items: center;
     background-color: white;
 	border: 0px solid #000000;
 	overflow: hidden;
-	border-radius: 30px 30px 0px 0px;
--moz-border-radius: 30px 30px 0px 0px;
--webkit-border-radius: 30px 30px 0px 0px;
+	border-radius: 3vw 3vw 0vw 0vw;
+    -moz-border-radius: 3vw 3vw 0vw 0vw;
+    -webkit-border-radius: 3vw 3vw 0vw 0vw;
 	border: 0px solid #000000;
-    /* border-bottom: 2px solid #cccccc; R */
+
 }
 
-.food-image {
+.food-image, .food-image2 {
 	min-width: 8rem;
- 	height: 7rem;
+ 	height: 8rem;
  	background-size: cover;
  	background-position: center;
  	background-color: #dedddd;
 }
 
-.food-title-and-link {
-	font-size: 1rem;
+.food-title-and-link, .food-title-and-link2 {
     padding-left: 1rem;
     padding-right: 1rem;
-    /* overflow-x: scroll; R */
     color: #e79547;
 }
 
-.food-title {
+.food-title, .food-title2 {
+    font-size: 1.35vw;
+    line-height: 1.75vw;
     font-family: calder-dark-shadow;
 }
 
 /* link to recipe */
-.food-title-and-link a {
-	font-size: 1rem;
+.food-title-and-link a, .food-title-and-link2 .recipeBookmark {
+    font-size: 1.15vw;
+    line-height: 2.15vw;
     text-decoration: none;
     font-weight: bold;
-    color: #2196F3;
+    color: #7090e8;
     cursor: pointer;
+    font-family: calder-dark;
 }
 
-.food-title-and-link a:hover {
+.food-title-and-link a:hover, .food-title-and-link2 .recipeBookmark:hover {
 	opacity: .8;
 }
 
 .plus-sign {
- width: 1rem;
- margin-right: .3rem;
- margin-bottom: -.2rem;
+    width: 2vw;
+    margin-top: 0.5vw;
+    margin-right: .4rem;
+    margin-bottom: -0.5rem;
 }
 
 .add-to-grocery-list {
-	font-size: .85rem;
+    font-size: 1vw;
+    font-family: calder-dark;
     text-decoration: none;
-    font-weight: bold;
-    color: #2196F3;
+    color: #7090e8;
     cursor: pointer;
 }
 
@@ -247,8 +248,8 @@ button {
     padding: 0.4vw 1.25vw;
     border: 0;
     cursor: pointer;
-    margin-right: 30%;
-    margin-left: 30%;
+    margin-right: 34.5%;
+    margin-left: 34.5%;
 }
 
 /* on grocery list page */
@@ -260,10 +261,6 @@ button {
     margin-left: 12.5%;
     margin-right: 12.5%;
     margin-bottom: 3vw;
-
-	/* -webkit-box-shadow: 0px 0px 11px 4px rgba(47,77,158,1);
--moz-box-shadow: 0px 0px 11px 4px rgba(47,77,158,1);
-box-shadow: 0px 0px 11px 4px rgba(47,77,158,1); */
 }
 
 /* food title/link on grocery list page */
@@ -313,337 +310,41 @@ box-shadow: 0px 0px 11px 4px rgba(47,77,158,1); */
     opacity: .6;
 }
 
-.quantity-field {
+.quantity-field, .quantity-field2 {
 	width: 2rem;
 	margin-left: .5rem;
 }
 
-#footerR {
-    clear: both;
-    width: 100%;
-    height: 7vw;
-    background-color: #772001;
-    color: #d65528;
-    font-size: 1vw;
-    font-family: calder-dark;
-    font-weight: 400;
-    text-align: center;
-    padding: 2vw;
-}
-
-/* R + R tab content container */
-.rr-recipes-container {
-    /* min-height: 100%; */
-}
-
-/* 
-Allura Regular
-font-family: allura, sans-serif;
-font-weight: 400;
-font-style: normal; 
-
-balzano regular
-font-family: allura, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-caliban regular
-font-family: caliban-std, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-cheap pine window shadow
-font-family: cheap-pine-shadow, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-cheap pine regular
-font-family: cheap-pine-shadow, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-cheap pine sans
-font-family: cheap-pine-shadow, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-shelby reg
-font-family: cheap-pine-shadow, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-shelby bold
-font-family: cheap-pine-shadow, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-calder dark outline
-font-family: calder-dark-outline, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-calder grit shadow
-font-family: calder-dark-shadow, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-calder script
-font-family: calder-script, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-calder dark grit shadow
-font-family: calder-dark-grit-shadow, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-calder - lc
-font-family: calder-lc, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-calder dark grit
-font-family: calder-dark-grit, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-calder shadow
-font-family: calder-shadow, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-calder dark
-font-family: calder-dark, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-calder lc grit
-font-family: calder-lc-grit, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-modish
-font-family: modish, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-winsome
-font-family: winsome, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-p22 pooper black pro reg
-font-family: p22-pooper-black-pro, sans-serif;
-font-weight: 400;
-font-style: normal;
-
-wreath thin
-font-family: wreath, serif;
-font-weight: 200;
-font-style: normal;
-
-wreath light
-font-family: wreath, serif;
-font-weight: 300;
-font-style: normal;
-
-wreath regular
-font-family: wreath, serif;
-font-weight: 400;
-font-style: normal;
-
-wreath medium
-font-family: wreath, serif;
-font-weight: 500;
-font-style: normal;
-
-wreath bold
-font-family: wreath, serif;
-font-weight: 700;
-font-style: normal;
-
-*/
-
-
-#secondBar {
-    float: left;
-    width: 100%;
-    height: 6vw;
-    background-color: #f6921e;
-    z-index: 1;
-}
-
-#welcomeBar {
-    float: left;
-    width: 28%;
-    height: 7vw;
-    border-top-left-radius: 3vw;
-    border-top-right-radius: 3vw;
-    font-size: 1.6vw;
-    color: #fff;
-    background-color: #d65528;
-    font-family : calder-dark;
-    font-weight : 400;
-    padding: 2.5vw;
-    z-index: 1;
-}
-
-#thirdHalfBar {
-    clear: both;
-    float: left;
-    width: 3%;
-    height: 7vw;
-    background-color: #d65528;
-    z-index: 99;
-}
-
-#sepBar {
-    float: left;
-    width: 75%;
-    height: 7vw;
-    border-top-left-radius: 3vw;
-    border-top-right-radius: 3vw;
-    background-color: #F6921E;
-    z-index: 1000;
-    position: relative;
-    margin-left: -3vw;
-}
-
-#thirdSHalfBar {
-    float: right;
-    width: 30%;
-    height: 7vw;
-    background-color: #759D59;
-    z-index: 1;
-    position: relative;
-    margin-top: -7vw;
-}
-
-div.desktopView, div.desktopRRView {
-    float: left;
-    width: 47%;
-    height: auto;
-    border-top-left-radius: 3vw;
-    border-top-right-radius: 3vw;
-    background-color : transparent;
-    margin: 1vw;
-} 
-
-.desktopView .imageFood, .desktopRRView .imageRRFood {
-    width: 23%;
-    height: 10vw;
-    border-top-left-radius: 3vw;
-    background-size: cover;
-    background-position: center;
-    float: left;
-}
-
-div.resultView, div.resultRRView {
-    float: left;
-    width: 72%;
-    height: auto;
-    color: #F6921E;
-    font-size: 1.5vw;
-    line-height: 1.75vw;
-    font-family: calder-dark-shadow;
-    font-weight: 400;
-    margin: 0vw 1vw 0vw;
-    padding: 1vw 1vw 0vw;
-} 
-.resultViewLink, .resultRRViewLink {
-    font-size: 1.25vw;
-    float: left;
-    width: 72%;
-    height: auto;
-    color: #7090e8;
-    line-height: 1.75vw;
-    font-family: calder-dark-shadow;
-    font-weight: 400;
-    margin: 0vw 1vw 0vw;
-    padding: 0.3vw 1vw 0vw;
-}
-
-
-img.addToButton {
-    float: left;
-    width: 5vh;
-    height: 5vh;
-    margin: 0.2vw 0.5vw 0vw 2vw;
-}
-
-.addToGL {
-    float: left;
-    font-size: 1vw;
-    font-family: calder-dark;
-    font-weight: 400;
-    color: #7090e8;
-    padding-top: 0.55vw;
-}
-
-img.addToButtonFR {
-    float: left;
-    width: 5%;
-    height: 2.4vw;
-    margin: 1vw 0.5vw 0vw 2vw;
-}
-
-.addToGLFR {
-    float: left;
-    font-size: 1vw;
-    font-family: calder-dark;
-    font-weight: 400;
-    color: #d65528;
-    padding-top: 0.75vw;
-    
-}
-
 #rrIndex {
-    clear: both;
-    float: left;
-    width: 100%;
-    min-height: 50vw;
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     background-color: #759D59;
-	padding-bottom: 3vw;
-	padding-top: 3vw;
-}
-
-#rrRecipeSnapshot {
-    clear: both;
-    float: left;
-    width: 99%;
-    min-height: 50vw;
-    display: block;
+    padding-top: 3vw; 
+    padding-bottom: 4vw;
 }
 
 #rrRecipeBox {
-    clear: both;
-    float: left;
     width: 100%;
     min-height: 50vw;
     background-color: #759D59;
-    display: block;
+    padding-top: 4vw;
     padding-bottom: 3vw;
 }
 
 #rrFullRecipe {
-    clear: both;
     width: 75%;
     min-height: 50vw;
-    margin-top: 8vw;
+    margin-top: 4vw;
     margin-left: 12.5%;
     margin-right: 12.5%;
-    margin-bottom: 8vw;
+    margin-bottom: 6vw;
     background-color: #fff;
-    display: block;
 }
 
 div#back-button {
     width: 4%;
-    height: 0vw;
-    margin-top: 4vw;
     margin-left: 91vw;
-    display: inline-block;
     opacity: 0.7;
 }
 
@@ -652,21 +353,18 @@ div#back-button:hover {
 }
 
 #goLeft {
-    float: left;
     width: 10%;
-    height: auto;
-    margin-top: 2vw;
+    padding-top: 2vw;
     margin-left: 2vw;
     position: relative;
     z-index: 99;
 }
 #goRight {
-    float: right;
     width: 10%;
-    height: auto;
-    margin-top: 2vw;
-    margin-right: 2vw;
+    margin-top: -7vw;
+    margin-left: 64.5vw;
     position: relative;
+    display: inline-block;
     z-index: 99;
 }
 
@@ -686,7 +384,7 @@ div#back-button:hover {
 div.FullRecipeImage {
     width: 50%;
     height: 20vw;
-    margin-top: 1vw;
+    margin-top: -10vw;
     margin-left: 25%;
     margin-right: 25%;
     margin-bottom: 1vw;
@@ -701,7 +399,7 @@ div.FullRecipeImage {
     text-align: center;
     margin-bottom: 1vw;
 }
-.FullRecipePrepTime, .FullRecipeServesNum {
+.FullRecipePrepTime, .FullRecipeServesNum, .FullRecipeCookTime, .FullRecipeIngredients, .FullRecipeDirections {
     font-size: 1.1vw;
     font-family: calder-dark;
     font-weight: 400;
@@ -709,29 +407,6 @@ div.FullRecipeImage {
     display: block;
     text-align: left;
     margin-left: 25%;
-    margin-top: 1vw;
-    margin-bottom: 0.4vw;
-}
-.FullRecipeCookTime {
-    font-size: 1.1vw;
-    font-family: calder-dark;
-    font-weight: 400;
-    color: #772001;
-    display: block;
-    text-align: left;
-    margin-left: 25%;    
-    margin-top: 1vw;
-    margin-bottom: 0.4vw;
-}
-.FullRecipeIngredients {
-    font-size: 1.1vw;
-    font-family: calder-dark;
-    font-weight: 400;
-    color: #772001;
-    display: block;
-    text-align: left;
-    margin-left: 25%;
-    margin-right: 25%;
     margin-top: 1vw;
     margin-bottom: 0.4vw;
 }
@@ -746,35 +421,14 @@ div.FullRecipeImage {
 .recipeDirLines {
     list-style-type: none;
     margin-top: 1vw;
+    margin-left: 1vw;
 }
 .recipeILines {
     list-style-type: none;
+    margin-left: 1vw;
 }
 
-.FullRecipeDirections {
-    font-size: 1.1vw;
-    font-family: calder-dark;
-    font-weight: 400;
-    color: #772001;
-    display: block;
-    text-align: left;
-    margin-left: 25%;
-    margin-right: 25%;
-    margin-bottom: 0.4vw;
-}
-.FullRecipePerServing {
-    font-size: 1.1vw;
-    font-family: calder-dark;
-    font-weight: 400;
-    color: #772001;
-    display: block;
-    text-align: left;
-    margin-left: 25%;
-    margin-right: 25%;
-    margin-top: 1vw;
-    margin-bottom: 0.4vw;
-}
-.FullRecipeSource {
+.FullRecipePerServing, .FullRecipeSource {
     font-size: 1vw;
     font-family: calder-dark;
     font-weight: 400;
@@ -786,51 +440,214 @@ div.FullRecipeImage {
     margin-bottom: 0.4vw;
 }
 .rrPDFbutton {
-    float: left;
-    width: 11vw;
-	height: 2.5vw;
+    width: 15vw;
+	height: 3.5vw;
 	border-radius: 2vw;
-    font-size: 0.75vw;
+    font-size: 1vw;
     font-family: calder-dark;
     font-weight: 400;
     background-color: #d65528;
     color: #fff;
-    display: block;
     text-align: center;
-    margin-top: 1vw;
-    margin-left: 25%;
-    padding-top: 0.75vw;
+    margin-top: 2vw;
+    margin-left: 37.5%;
+    padding-top: 1.12vw;
 }
 .rrPDFbutton:hover {
     background-color: #772001;
     color: #f6921e;
 }
 
+#footerR {
+    clear: both;
+    width: 100%;
+    height: 7vw;
+    background-color: #772001;
+    color: #d65528;
+    font-size: 1vw;
+    font-family: calder-dark;
+    font-weight: 400;
+    text-align: center;
+    padding: 2vw;
+}
 
 
 /* MEDIA QUERIES *****************************************************************************/
 
 @media screen and (max-width: 990px) {
-	.food-block {
+	.food-block, .food-block2 {
 		width: 45%;
 	}
 }
 
 @media screen and (max-width: 850px) {
-	.food-image {
+	.food-image, .food-image2 {
 		height: 8rem;
 	}
 }
 
 @media screen and (max-width: 640px) {
-	.food-block {
-		width: 100%;
+    #rrLogo{
+        width: 40%;
+        height: auto;
+        margin: 2.4vw 4vw 2vw;
+    }
+    .food-block, .food-block2 {
+        width: 90%;
+        border-radius: 4vw 4vw 0vw 0vw;
+        -moz-border-radius: 4vw 4vw 0vw 0vw;
+        -webkit-border-radius: 4vw 4vw 0vw 0vw;
+    }
+    .food-title, .food-title2 {
+        font-size: 3vw;
+        line-height: 4vw;
+    }
+	.tab {
+        font-size: 2.5vw;
+        height: 12vw;
+        border-radius: 4vw 4vw 0vw 0vw;
+        padding: 3vw;
+    }
+    .tab-1 {
+        width: 43%;
+    }
+    .tab-2 {
+        width: 29%;
+    }
+    .tab-3 {
+        width: 28%;
+    }
+    .search-bar-container {
+		flex-direction: column;
+		padding-left: 1rem;
+    	padding-right: 1rem;
 	}
+	#searchIngredients, #searchFood {
+		margin: 0;
+        height: 8vw;
+        border-radius: 7vw;
+		width: 96%;
+        margin-top: 1.5rem;
+        margin-left: 2%;
+		font-size: 2.5vw;
+		padding-left: 4vw;
+    	padding-right: 0;
+	}
+	#submit {
+        margin: 0;
+        border-radius: 7vw;
+		margin: 1.5rem 37.5% 0.5rem;
+		height: 8vw;
+        width: 25%;
+		font-size: 3vw;
+    }
+    .food-title-and-link a, .food-title-and-link2 .recipeBookmark {
+        font-size: 2.5vw;
+        line-height: 4vw;
+    }
+    .add-to-grocery-list {
+        font-size: 2.15vw;
+    }
+    .plus-sign {
+        width: 4vw;
+        margin-top: 1.5vw;
+    }
+    div#back-button {
+        width: 5%;
+        margin-left: 91vw;
+    }
+    div.FullRecipeImage {
+        width: 80%;
+        height: 24vw;
+        margin-top: -8vw;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-bottom: 3vw;
+    }
+    .FullRecipeTitle {
+        font-size: 3vw;
+        margin-bottom: 2vw;
+    }
+    .FullRecipePrepTime, .FullRecipeServesNum, .FullRecipeCookTime, .FullRecipeIngredients, .FullRecipeDirections {
+        font-size: 1.8vw;
+        margin-left: 10%;
+    }
+    .FullRecipePerServing, .FullRecipeSource {
+        font-size: 1.6vw;
+        margin-left: 10%;
+    }
+    .rrPDFbutton {
+        width: 30vw;
+        height: 5.5vw;
+        border-radius: 3vw;
+        font-size: 2vw;
+        margin-top: 5vw;
+        margin-left: 23%;
+        padding-top: 1.4vw;
+    }
+    #footerR {
+        height: 14vw;
+        font-size: 2vw;
+        padding: 4vw;
+    }
+    #exportPDF {
+        margin: 7vw 0vw 4vw;
+        width: 50%;
+        height: 6vw;
+        border-radius: 7vw;
+        font-size: 2.5vw;
+        margin-right: 25%;
+        margin-left: 25%;
+    }
+    .grocery-list-entry strong, .grocery-list-entry a {
+        font-size: 3vw;
+        line-height: 5vw;
+    }
+    .ingredient-list-entry {
+        font-size: 2.4vw;
+        line-height: 5vw;
+    }
+    .remove-item {
+        font-size: 2.4vw;
+        line-height: 5vw;
+    }
+    .remove-ingredient {
+	    margin-left: .25rem;
+	    margin-bottom: -.3rem;
+        width: 2.75vw;
+    }
+    .quantity-field {
+        width: 2.25rem;
+        height: 1.5rem;
+        margin-left: 0.85rem;
+        margin-right: 0.85rem;
+    }
+    
 }
 
 @media screen and (max-width: 625px) {
+    #rrLogo{
+        width: 40%;
+        margin: 2.4vw 4vw 2vw;
+    }
+    .food-title, .food-title2 {
+        font-size: 3vw;
+        line-height: 4vw;
+    }
 	.tab {
-    	width: 30%;
+        font-size: 2.5vw;
+        height: 12vw;
+        border-radius: 4vw 4vw 0vw 0vw;
+        padding: 3vw;
+    }
+    .tab-1 {
+        width: 43%;
+    }
+    .tab-2 {
+        width: 29%;
+    }
+    .tab-3 {
+        width: 28%;
 	}
 	.search-bar-container {
 		flex-direction: column;
@@ -839,34 +656,59 @@ div.FullRecipeImage {
 	}
 	#searchIngredients, #searchFood {
 		margin: 0;
-		height: 10vw;
-		width: 100%;
-		margin-top: 1.5rem;
+        height: 8vw;
+        border-radius: 7vw;
+		width: 96%;
+        margin-top: 1.5rem;
+        margin-left: 2%;
 		font-size: 2.5vw;
-		padding-left: 2vw;
+		padding-left: 4vw;
     	padding-right: 0;
 	}
 	#submit {
-		margin: 0;
-		margin-top: 1.5rem;
-		margin-bottom: 1.5rem;
-		height: 10vw;
-		font-size: 2.5vw;
-	}
-	.food-image {
+        margin: 0;
+        border-radius: 7vw;
+		margin: 1.5rem 37.5% 0.5rem;
+		height: 8vw;
+        width: 25%;
+		font-size: 3vw;
+    }
+    .food-block, .food-block2 {
+        border-radius: 4vw 4vw 0vw 0vw;
+        -moz-border-radius: 4vw 4vw 0vw 0vw;
+        -webkit-border-radius: 4vw 4vw 0vw 0vw;
+    }
+	.food-image, .food-image2 {
 		height: 7rem;
-	}
+    }
+    .food-title-and-link a, .recipeBookmark {
+        font-size: 3vw;
+        line-height: 3.25vw;
+    }
+    .add-to-grocery-list {
+        font-size: 2.15vw;
+    }
+    #groceryListContainer {
+        margin-bottom: 10vw;
+    }
 	#exportPDF {
-		width: 100%;
-		margin: 0;
+		width: 55%;
 		margin-top: 1.5rem;
-		margin-bottom: 1.5rem;
-		height: 10vw;
-		font-size: 2.5vw;
+		margin-bottom: 2.5rem;
+		height: 7vw;
+        font-size: 2.5vw;
+        margin-left: 22.5%;
 	}
 	.grocery-list-background {
 		padding: 1rem;
-	}
+    }
+    
+    #footerR {
+        height: 15vw;
+        font-size: 2.25vw;
+        padding: 5vw;
+    }
+
 }
 
 @media screen and (max-width: 375px) {
