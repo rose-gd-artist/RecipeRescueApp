@@ -1,3 +1,136 @@
+// $(document).ready(function(){
+
+//     let allTabs = document.getElementsByClassName("tab");
+//     let activeButton = document.getElementsByClassName("activeButton");
+//     let tabContents = document.getElementsByClassName("tab-content");
+//     let tab2 = document.getElementsByClassName("tab-2");
+//     rrIndex = document.getElementById("rrIndex");
+//     rrRecipeSnapshot = document.getElementById("rrRecipeSnapshot");
+//     resultRRViewLink = document.getElementsByClassName("resultRRViewLink");
+//     let rrFullRecipe = document.getElementById("rrFullRecipe");
+//     RRList = document.getElementById("RRList");
+//     rrRecipeBox = document.getElementById("rrRecipeBox");
+
+//     /* page tabs */
+//     for (let i = 0; i < allTabs.length; i++) {
+//         allTabs[i].addEventListener("click", function () {
+//             for (let i = 0; i < allTabs.length; i++) {
+//                 tabContents[i].classList.remove("active-tab");
+//                 if(tab2){
+//                     allTabs[i].classList.remove("activeButton");
+//                 } else {
+//                     allTabs[i].classList.remove("activeButton");
+//                 }
+//             }
+//             tabContents[i].classList.add("active-tab"); /* add class to current tab */
+//             allTabs[i].classList.add("activeButton");
+//         });
+//     } /* end page tabs */
+    
+//     let searchIngredients = document.getElementById("searchIngredients");
+//     let searchFood = document.getElementById("searchFood");
+//     let submit = document.getElementById("submit");
+//     let resultsBox = document.getElementById("results");
+//     let groceryListContainer = document.getElementById("groceryListContainer");
+
+//     getRecipe(); /* preload some search results */
+
+//     submit.addEventListener("click", getRecipe);
+
+//     function getRecipe() {
+//         var settings = {
+//             "async": true,
+//             "crossDomain": true,
+//             "url": "https://recipe-puppy.p.rapidapi.com/?i=" + searchIngredients.value + "&q=" + searchFood.value,
+//             "method": "GET",
+//             "headers": {
+//                 "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
+//                 "x-rapidapi-key":  "8fd4f85bddmsh92489d7ccb202dbp1eec27jsn251313e441a9"
+//             }
+//         }
+        
+//         $.ajax(settings).done(function (response) {
+//             displayRecipes(response);
+//         }); 
+//     } /* end of getRecipe fx */
+
+//     function displayRecipes(searchedIngredients){
+//         let answer = searchedIngredients;
+//         let newAnswer = JSON.parse(answer);
+
+//         resultsBox.innerHTML = ""; /* clear previous food result boxes */
+
+//         for(let i = 0; i < newAnswer.results.length; i++){
+//             let recipeListing = document.createElement("div");
+//             recipeListing.classList.add("food-block");
+//             recipeListing.innerHTML = "<div class='food-image'></div>";
+//             resultsBox.append(recipeListing);
+//             /* insert food background image ('background-size' property is set to 'cover' so each food image will be the same size) */
+//             $(".food-image").eq($(this).index()).css({
+//                 "background-image": "url('" + newAnswer.results[i].thumbnail + "')"
+//             });
+
+//             /* insert food title, recipe link, and 'add to grocery list' button */
+//             recipeListing.innerHTML += "<div class='food-title-and-link'><span class='food-title'>" + newAnswer.results[i].title + "</span><br>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>Full Recipe</a> <div class='add-to-grocery-list'><img class='plus-sign' src='images/addTo.svg'>Add Ingredients to Grocery List</div></div>";
+                
+//             /* adding ingredients to grocery list */
+//             let currentGroceryItem = document.getElementsByClassName("add-to-grocery-list")[i];
+
+//             currentGroceryItem.addEventListener("click", function () {
+//                 /* split ingredients list returned from API and create bullets */
+//                 let splitIngredientsList = newAnswer.results[i].ingredients.split(",");
+//                 let bulletedList = "";
+
+//                 for (let i = 0; i < splitIngredientsList.length; i++) {
+//                     bulletedList += "<div class='ingredient-list-entry'><span>&#8226; </span>" + splitIngredientsList[i] + "<input class='quantity-field' placeholder='QTY' type='text'><img class='remove-ingredient' src='images/xCloseButton.svg'></div>";
+//                 }
+
+//                 groceryListContainer.innerHTML += "<div class='grocery-list-entry'><strong>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>" + newAnswer.results[i].title + "</a>" + ":</strong><br>" + bulletedList + "<br><span class='remove-item'>remove item</span></div>";
+
+//                 /* removing items from a grocery list */
+//                 let removeItem = document.getElementsByClassName("remove-item");
+//                 removeItemOrIngredient (removeItem);
+
+//                 /* removing ingredients from a grocery list */
+//                 let removeIngredientItem = document.getElementsByClassName("remove-ingredient");
+//                 removeItemOrIngredient (removeIngredientItem);
+
+//             }); /* end click event */
+//         } /* end of for loop */
+//     } /* end of displayRecipe fx */
+
+//     /* function for removing grocery items or ingredients from the list */
+//     function removeItemOrIngredient (itemToBeRemoved) {
+//         for (let i = 0; i < itemToBeRemoved.length; i++) {
+//             itemToBeRemoved[i].addEventListener("click", function () {
+//                 if (itemToBeRemoved[i].classList.contains("remove-ingredient")) {
+//                     $('.ingredient-list-entry').eq(i).fadeOut(400); /* remove ingredient */
+//                 } else {
+//                     $('.grocery-list-entry').eq(i).fadeOut(400); /* remove grocery item */
+//                 }
+//             });
+//         }
+//     }
+
+//     /* download/print PDF of grocery list (print settings specified in CSS print media query) */
+//     let exportPDF = document.getElementById("exportPDF");
+
+//     exportPDF.addEventListener("click", printPage);
+
+//     /* function for printing the screen */
+//     function printPage() {
+//         window.print();
+//     }
+
+//     /* function for 'R + R Recipes' tab */
+//     recipeIndexPage(rrRecipeList);
+
+// }) /* end of getRecipe fx */ ?* tom your code is entirely intact
+
+// ////////////////////////////////////////////////////////////
+
+/// rosie's js code ///////
+
 $(document).ready(function(){
 
     let allTabs = document.getElementsByClassName("tab");
@@ -31,7 +164,7 @@ $(document).ready(function(){
     let searchFood = document.getElementById("searchFood");
     let submit = document.getElementById("submit");
     let resultsBox = document.getElementById("results");
-    let groceryListContainer = document.getElementById("groceryListContainer");
+    groceryListContainer = document.getElementById("groceryListContainer");
 
     getRecipe(); /* preload some search results */
 
@@ -45,7 +178,7 @@ $(document).ready(function(){
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
-                "x-rapidapi-key":   recipePuppyAP
+                "x-rapidapi-key":  recipePuppyAPI
             }
         }
         
@@ -65,11 +198,12 @@ $(document).ready(function(){
             recipeListing.classList.add("food-block");
             recipeListing.innerHTML = "<div class='food-image'></div>";
             resultsBox.append(recipeListing);
+
             /* insert food background image ('background-size' property is set to 'cover' so each food image will be the same size) */
             $(".food-image").eq($(this).index()).css({
                 "background-image": "url('" + newAnswer.results[i].thumbnail + "')"
             });
-
+    
             /* insert food title, recipe link, and 'add to grocery list' button */
             recipeListing.innerHTML += "<div class='food-title-and-link'><span class='food-title'>" + newAnswer.results[i].title + "</span><br>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>Full Recipe</a> <div class='add-to-grocery-list'><img class='plus-sign' src='images/addTo.svg'>Add Ingredients to Grocery List</div></div>";
                 
@@ -129,8 +263,6 @@ $(document).ready(function(){
 
 ////////////////////////////////////////////////////////////
 
-/// rosie's js code ///////
-
 
 let RRList;
 let welcomeBar;
@@ -154,6 +286,12 @@ let goLeft;
 let goRight;
 let currentPage;
 let rrPDFbutton;
+let currentGroceryItem;
+let removeItem;
+let removeIngredientItem;
+let groceryListContainer;
+
+
 
 let rrRecipeList = [
              
@@ -407,46 +545,76 @@ let rrRecipeList = [
 
 // degree fahrenheit code is     &#8457;  &#176; //
 
-
-
 function recipeIndexPage(list){
 
-    rrIndex = document.getElementById("rrIndex");
-    rrRecipeSnapshot = document.getElementById("rrRecipeSnapshot");
-    resultRRViewLink = document.getElementsByClassName("resultRRViewLink");
+    // added this in //
 
-    let i = 0;
+        newRRlist = list;
 
-    newRRlist = list;
+        for(let i = 0; i < newRRlist.length; i++){
+            let ourListing = document.createElement("div");
+            ourListing.classList.add("food-block2");
+            ourListing.innerHTML = "<div class='food-image2'></div>";
+            rrIndex.append(ourListing);
 
-    // thirdHalfBar.style.display = "none";
-    // sepBar.style.display = "none";
-    // thirdSHalfBar.style.display = "none";
+            /* insert food background image ('background-size' property is set to 'cover' so each food image will be the same size) */
+            $(".food-image2").eq($(this).index()).css({
+                "background-image": "url('" + newRRlist[i].recipePic + "')"
+            });
 
-    for(i = 0; i < newRRlist.length; i++){
+            /* insert food title, recipe link, and 'add to grocery list' button */
+            ourListing.innerHTML += "<div class='food-title-and-link2'><span class='food-title2'>" + newRRlist[i].recipeName + "</span><br><span class='recipeBookmark'>Full Recipe</span></br><div class='add-to-grocery-list2'><img class='plus-sign2' src='images/addTo.svg'>Add Ingredients to Grocery List</div></div>";
+            
+            /* adding ingredients to grocery list */
+            currentGroceryItem2 = document.getElementsByClassName("add-to-grocery-list2")[i];
 
-        let ourListing = document.createElement("div");
-        ourListing.style.color = "#759D59";
-        ourListing.style.backgroundColor = "#fff";
-        rrRecipeSnapshot.append(ourListing);
-        ourListing.classList.add("desktopRRView");
+            currentGroceryItem2.addEventListener("click", function () {
+                /* trying to split ingredients list returned from our database and create bullets */
 
-        ourListing.innerHTML = "<div class='imageRRFood'></div>";
+                let recipeILines = document.getElementsByClassName("recipeILines")[0];
+                console.log(recipeILines)
 
-        $(".imageRRFood").eq($(this).index()).css({
-            "background-image": "url('" + newRRlist[i].recipePic + "')"
-        });
+                let splitIngredientsList2 = newRRlist;
+                console.log(splitIngredientsList2)
+                console.log(newRRlist)
+                // newRRlist[i].RRingredients[i].split(",");
+                let bulletedList2 = "";
 
-        ourListing.innerHTML +=  "<div class='resultRRView'>" + newRRlist[i].recipeName;
-        let link = document.createElement("div");
-        link.innerHTML += 'Full Recipe';
-        link.classList.add('resultRRViewLink');
-        ourListing.appendChild(link);
-        ourListing.innerHTML += "<img class='addToButton' alt='add ingredients to grocery list button' src='images/addTo.svg'><div class='addToGL'>Add ingredients to grocery list</div></div>"
+                for (let i = 0; i < splitIngredientsList2.length; i++) {
 
-    } /* end of for loop */
+                    	bulletedList2 += "<div class='ingredient-list-entry'><span>&#8226; </span>" + splitIngredientsList2[i] + "<input class='quantity-field' placeholder='QTY' type='text'><img class='remove-ingredient' src='images/xCloseButton.svg'></div>"; 	
+            	}
 
-    let fullRecipeLink = document.getElementsByClassName("resultRRViewLink");
+                groceryListContainer.innerHTML += "<div class='grocery-list-entry2'><strong><span class='recipeBookmark'>" + newRRlist[i].recipeName + "</span></br>" + "</strong><br>" + bulletedList2 + "<br><span class='remove-item2'>remove item</span></div>";
+
+                /* removing items from a grocery list */
+                let removeItem2 = document.getElementsByClassName("remove-item2");
+                removeItemOrIngredient2 (removeItem2);
+
+                /* removing ingredients from a grocery list */
+                let removeIngredientItem2 = document.getElementsByClassName("remove-ingredient2");
+                removeItemOrIngredient2 (removeIngredientItem2);
+
+            }); /* end click event */
+        } /* end of for loop */
+    //} /* end of displayRecipe2 fx */
+
+        /* function for removing grocery items or ingredients from the list */
+        function removeItemOrIngredient2 (itemToBeRemoved2) {
+            for (let i = 0; i < itemToBeRemoved2.length; i++) {
+                itemToBeRemoved2[i].addEventListener("click", function () {
+                    if (itemToBeRemoved2[i].classList.contains("remove-ingredient2")) {
+                        $('.ingredient-list-entry2').eq(i).fadeOut(400); /* remove ingredient */
+                    } else {
+                        $('.grocery-list-entry2').eq(i).fadeOut(400); /* remove grocery item */
+                    }
+                });
+            }
+        }
+
+    // added this in //
+
+    let fullRecipeLink = document.getElementsByClassName("recipeBookmark");
     for(let i = 0; i < fullRecipeLink.length; i++){
             fullRecipeLink[i].addEventListener("click", function(){
                 displayRecipeSlide(i);
@@ -630,7 +798,7 @@ function recipeStructure(justArecipe){
         
     function goBack() {
         rrRecipeBox.style.display = 'none';
-        rrIndex.style.display = 'block';
+        rrIndex.style.display = 'flex';
     }
 
     function hideAllRecipes() {    

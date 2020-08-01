@@ -96,7 +96,7 @@ button {
 .search-bar-container {
 	display: flex;
     position: relative;
-	background-color: #F6921E;
+    background-color: #F6921E;
     /* -webkit-box-shadow: 0px 8px 11px -1px rgba(230,136,28,1);  /* commented out R */
 	/*-moz-box-shadow: 0px 8px 11px -1px rgba(230,136,28,1);  /* commented out R */
 	/*box-shadow: 0px 8px 11px -1px rgba(230,136,28,1); */  /* commented out R */
@@ -107,7 +107,6 @@ button {
     height: 3vw;
     border-radius: 2vw;
     background-color: #fff;
-    color: #759D59;
     font-size: 1.3vw;
     font-family: calder-dark-shadow;
     font-weight: 400;
@@ -115,7 +114,6 @@ button {
     border-color: transparent;
     padding-left: 1vw;
     padding-right: 1vw;
-
 }
 
 /* search field 1 */
@@ -130,6 +128,10 @@ button {
 
 ::placeholder {
 	color: #bfbfbf;
+}
+
+input {
+    color: #555;
 }
 
 #submit {
@@ -162,69 +164,73 @@ button {
 }
 
 /* recipe blocks that are generated */
-.food-block {
+.food-block, .food-block2 {
 	display: flex;
-	width: 40%;
+	width: 47%;
 	margin: 1rem;
     align-items: center;
     background-color: white;
 	border: 0px solid #000000;
 	overflow: hidden;
-	border-radius: 30px 30px 0px 0px;
--moz-border-radius: 30px 30px 0px 0px;
--webkit-border-radius: 30px 30px 0px 0px;
+	border-radius: 3vw 3vw 0vw 0vw;
+    -moz-border-radius: 3vw 3vw 0vw 0vw;
+    -webkit-border-radius: 3vw 3vw 0vw 0vw;
 	border: 0px solid #000000;
     /* border-bottom: 2px solid #cccccc; R */
 }
 
-.food-image {
+.food-image, .food-image2 {
 	min-width: 8rem;
- 	height: 7rem;
+ 	height: 8rem;
  	background-size: cover;
  	background-position: center;
  	background-color: #dedddd;
 }
 
-.food-title-and-link {
-	font-size: 1rem;
+.food-title-and-link, .food-title-and-link2 {
     padding-left: 1rem;
     padding-right: 1rem;
     /* overflow-x: scroll; R */
     color: #e79547;
 }
 
-.food-title {
+.food-title, .food-title2 {
+    font-size: 1.35vw;
+    line-height: 1.75vw;
     font-family: calder-dark-shadow;
 }
 
 /* link to recipe */
-.food-title-and-link a {
-	font-size: 1rem;
+.food-title-and-link a, .food-title-and-link2 .recipeBookmark {
+    font-size: 1.15vw;
+    line-height: 2.15vw;
     text-decoration: none;
     font-weight: bold;
-    color: #2196F3;
+    color: #7090e8;
     cursor: pointer;
+    font-family: calder-dark;
 }
 
-.food-title-and-link a:hover {
+.food-title-and-link a:hover, .food-title-and-link2 .recipeBookmark:hover {
 	opacity: .8;
 }
 
-.plus-sign {
- width: 1rem;
- margin-right: .3rem;
- margin-bottom: -.2rem;
+.plus-sign, .plus-sign2 {
+    width: 2vw;
+    margin-top: 0.5vw;
+    margin-right: .4rem;
+    margin-bottom: -0.5rem;
 }
 
-.add-to-grocery-list {
-	font-size: .85rem;
+.add-to-grocery-list, .add-to-grocery-list2 {
+    font-size: 1vw;
+    font-family: calder-dark;
     text-decoration: none;
-    font-weight: bold;
-    color: #2196F3;
+    color: #7090e8;
     cursor: pointer;
 }
 
-.add-to-grocery-list:hover {
+.add-to-grocery-list:hover, .add-to-grocery-list2:hover {
 	opacity: .8;
 }
 
@@ -267,7 +273,7 @@ box-shadow: 0px 0px 11px 4px rgba(47,77,158,1); */
 }
 
 /* food title/link on grocery list page */
-.grocery-list-entry strong, .grocery-list-entry a {
+.grocery-list-entry strong, .grocery-list-entry a, .grocery-list-entry2 strong, .grocery-list-entry2 .recipeBookmark {
     color: #5c82e8;
     text-decoration: none;
     font-size: 1.5vw;
@@ -277,12 +283,12 @@ box-shadow: 0px 0px 11px 4px rgba(47,77,158,1); */
 }
 
 /* on grocery list page */
-.grocery-list-entry {
+.grocery-list-entry, .grocery-list-entry2 {
     margin-top: 1rem;
 }
 
 /* on grocery list page */
-.ingredient-list-entry {
+.ingredient-list-entry, .ingredient-list-entry2 {
     display: block;
     color: #58595b;
     font-size: 1.2vw;
@@ -292,7 +298,7 @@ box-shadow: 0px 0px 11px 4px rgba(47,77,158,1); */
 }
 
 /* 'remove item' text under grocery items */
-.remove-item {
+.remove-item, .remove-item2 {
 	color: #f18585;
 	display: inline-block;
 	margin-top: -1rem;
@@ -304,7 +310,7 @@ box-shadow: 0px 0px 11px 4px rgba(47,77,158,1); */
 }
 
 /* 'X' icon next to ingredient items */
-.remove-ingredient {
+.remove-ingredient, .remove-ingredient2 {
 	margin-left: .25rem;
 	margin-bottom: -.1rem;
     cursor: pointer;
@@ -313,7 +319,7 @@ box-shadow: 0px 0px 11px 4px rgba(47,77,158,1); */
     opacity: .6;
 }
 
-.quantity-field {
+.quantity-field, .quantity-field2 {
 	width: 2rem;
 	margin-left: .5rem;
 }
@@ -333,7 +339,7 @@ box-shadow: 0px 0px 11px 4px rgba(47,77,158,1); */
 
 /* R + R tab content container */
 .rr-recipes-container {
-    min-height: 100%;
+    /* min-height: 100%; */
 }
 
 /* 
@@ -465,7 +471,7 @@ font-style: normal;
 */
 
 
-#secondBar {
+/* #secondBar {
     float: left;
     width: 100%;
     height: 6vw;
@@ -517,30 +523,49 @@ font-style: normal;
     z-index: 1;
     position: relative;
     margin-top: -7vw;
-}
+} */
 
-div.desktopView, div.desktopRRView {
-    float: left;
+/* div.desktopView, div.desktopRRView {
+    display: flex;
+	width: 47%;
+	margin: 1rem;
+    align-items: center;
+    background-color: white;
+	border: 0px solid #000000;
+	overflow: hidden;
+	border-radius: 3vw 3vw 0vw 0vw;
+    -moz-border-radius: 3vw 3vw 0vw 0vw;
+    -webkit-border-radius: 3vw 3vw 0vw 0vw;
+	border: 0px solid #000000; */
+    /* float: left;
     width: 47%;
     height: auto;
     border-top-left-radius: 3vw;
     border-top-right-radius: 3vw;
     background-color : transparent;
-    margin: 1vw;
-} 
+    margin: 1vw; */
+    /* commented out my code and put in tom's */
+/* }  */
 
-.desktopView .imageFood, .desktopRRView .imageRRFood {
-    width: 23%;
+/* .desktopView .imageFood, .desktopRRView .imageRRFood {
+    min-width: 8rem;
+    height: 8rem;
+    background-size: cover;
+    background-position: center;
+    background-color: #dedddd; */
+    /* width: 23%;
     height: 10vw;
     border-top-left-radius: 3vw;
     background-size: cover;
     background-position: center;
-    float: left;
-}
-
-div.resultView, div.resultRRView {
-    float: left;
-    width: 72%;
+    float: left; */
+    /* commented out my code and put in tom's */
+    
+/* } */
+/* 
+div.resultView, div.resultRRView { */
+    /* float: left; */
+    /* width: 72%;
     height: auto;
     color: #F6921E;
     font-size: 1.5vw;
@@ -548,12 +573,12 @@ div.resultView, div.resultRRView {
     font-family: calder-dark-shadow;
     font-weight: 400;
     margin: 0vw 1vw 0vw;
-    padding: 1vw 1vw 0vw;
-} 
+    padding: 1vw 1vw 0vw; */
+/* } 
 .resultViewLink, .resultRRViewLink {
-    font-size: 1.25vw;
-    float: left;
-    width: 72%;
+    font-size: 1.25vw; */
+    /* float: left; */
+    /* width: 72%;
     height: auto;
     color: #7090e8;
     line-height: 1.75vw;
@@ -561,18 +586,16 @@ div.resultView, div.resultRRView {
     font-weight: 400;
     margin: 0vw 1vw 0vw;
     padding: 0.3vw 1vw 0vw;
-}
+} */
 
 
 img.addToButton {
-    float: left;
     width: 5vh;
     height: 5vh;
     margin: 0.2vw 0.5vw 0vw 2vw;
 }
 
 .addToGL {
-    float: left;
     font-size: 1vw;
     font-family: calder-dark;
     font-weight: 400;
@@ -581,69 +604,64 @@ img.addToButton {
 }
 
 img.addToButtonFR {
-    float: left;
     width: 5%;
     height: 2.4vw;
     margin: 1vw 0.5vw 0vw 2vw;
 }
 
 .addToGLFR {
-    float: left;
     font-size: 1vw;
     font-family: calder-dark;
     font-weight: 400;
     color: #d65528;
     padding-top: 0.75vw;
-    
 }
 
 #rrIndex {
-    clear: both;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #759D59;
+    padding-top: 3vw; 
+    padding-bottom: 4vw;
+    /* clear: both;
     float: left;
     width: 100%;
     min-height: 50vw;
     display: block;
     background-color: #759D59;
 	padding-bottom: 3vw;
-	padding-top: 3vw;
+	padding-top: 3vw; */
 }
-
+/* 
 #rrRecipeSnapshot {
-    clear: both;
-    float: left;
     width: 99%;
     min-height: 50vw;
-    display: block;
-}
+    display: flex;
+} */
 
 #rrRecipeBox {
-    clear: both;
-    float: left;
     width: 100%;
     min-height: 50vw;
     background-color: #759D59;
-    display: block;
+    padding-top: 4vw;
     padding-bottom: 3vw;
 }
 
 #rrFullRecipe {
-    clear: both;
     width: 75%;
     min-height: 50vw;
-    margin-top: 8vw;
+    margin-top: 4vw;
     margin-left: 12.5%;
     margin-right: 12.5%;
-    margin-bottom: 8vw;
+    margin-bottom: 6vw;
     background-color: #fff;
-    display: block;
 }
 
 div#back-button {
     width: 4%;
-    height: 0vw;
-    margin-top: 4vw;
     margin-left: 91vw;
-    display: inline-block;
+    /* display: inline-block; */
     opacity: 0.7;
 }
 
@@ -652,21 +670,18 @@ div#back-button:hover {
 }
 
 #goLeft {
-    float: left;
     width: 10%;
-    height: auto;
-    margin-top: 2vw;
+    padding-top: 2vw;
     margin-left: 2vw;
     position: relative;
     z-index: 99;
 }
 #goRight {
-    float: right;
     width: 10%;
-    height: auto;
-    margin-top: 2vw;
-    margin-right: 2vw;
+    margin-top: -7vw;
+    margin-left: 64.5vw;
     position: relative;
+    display: inline-block;
     z-index: 99;
 }
 
@@ -686,7 +701,7 @@ div#back-button:hover {
 div.FullRecipeImage {
     width: 50%;
     height: 20vw;
-    margin-top: 1vw;
+    margin-top: -10vw;
     margin-left: 25%;
     margin-right: 25%;
     margin-bottom: 1vw;
@@ -786,20 +801,18 @@ div.FullRecipeImage {
     margin-bottom: 0.4vw;
 }
 .rrPDFbutton {
-    float: left;
-    width: 11vw;
-	height: 2.5vw;
+    width: 15vw;
+	height: 3.5vw;
 	border-radius: 2vw;
-    font-size: 0.75vw;
+    font-size: 1vw;
     font-family: calder-dark;
     font-weight: 400;
     background-color: #d65528;
     color: #fff;
-    display: block;
     text-align: center;
-    margin-top: 1vw;
-    margin-left: 25%;
-    padding-top: 0.75vw;
+    margin-top: 2vw;
+    margin-left: 37.5%;
+    padding-top: 1.12vw;
 }
 .rrPDFbutton:hover {
     background-color: #772001;
@@ -824,13 +837,34 @@ div.FullRecipeImage {
 
 @media screen and (max-width: 640px) {
 	.food-block {
-		width: 100%;
+		width: 90%;
 	}
 }
 
 @media screen and (max-width: 625px) {
+    #rrLogo{
+        width: 40%;
+        height: auto;
+        margin: 2.4vw 4vw 2vw;
+    }
+    .food-title {
+        font-size: 3vw;
+        line-height: 4vw;
+    }
 	.tab {
-    	width: 30%;
+        font-size: 2.5vw;
+        height: 12vw;
+        border-radius: 4vw 4vw 0vw 0vw;
+        padding: 3vw;
+    }
+    .tab-1 {
+        width: 43%;
+    }
+    .tab-2 {
+        width: 29%;
+    }
+    .tab-3 {
+        width: 28%;
 	}
 	.search-bar-container {
 		flex-direction: column;
@@ -839,23 +873,36 @@ div.FullRecipeImage {
 	}
 	#searchIngredients, #searchFood {
 		margin: 0;
-		height: 10vw;
-		width: 100%;
-		margin-top: 1.5rem;
+        height: 8vw;
+        border-radius: 7vw;
+		width: 96%;
+        margin-top: 1.5rem;
+        margin-left: 2%;
 		font-size: 2.5vw;
-		padding-left: 2vw;
+		padding-left: 4vw;
     	padding-right: 0;
 	}
 	#submit {
-		margin: 0;
-		margin-top: 1.5rem;
-		margin-bottom: 1.5rem;
-		height: 10vw;
-		font-size: 2.5vw;
-	}
+        margin: 0;
+        border-radius: 7vw;
+		margin: 1.5rem 37.5% 0.5rem;
+		height: 8vw;
+        width: 25%;
+		font-size: 3vw;
+    }
+    .food-block {
+        border-radius: 4vw 4vw 0vw 0vw;
+        -moz-border-radius: 4vw 4vw 0vw 0vw;
+        -webkit-border-radius: 4vw 4vw 0vw 0vw;
+    }
 	.food-image {
 		height: 7rem;
-	}
+    }
+    .food-title-and-link a {
+        font-size: 3vw;
+        line-height: 3.25vw;
+
+    }
 	#exportPDF {
 		width: 100%;
 		margin: 0;
@@ -866,7 +913,14 @@ div.FullRecipeImage {
 	}
 	.grocery-list-background {
 		padding: 1rem;
-	}
+    }
+    
+    #footerR {
+        height: 15vw;
+        font-size: 2.25vw;
+        padding: 5vw;
+    }
+
 }
 
 @media screen and (max-width: 375px) {
