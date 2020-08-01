@@ -178,7 +178,7 @@ $(document).ready(function(){
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
-                "x-rapidapi-key":  recipePuppyAPI
+                "x-rapidapi-key": "8fd4f85bddmsh92489d7ccb202dbp1eec27jsn251313e441a9"
             }
         }
         
@@ -804,7 +804,7 @@ function recipeStructure(justArecipe){
         
     function goBack() {
         rrRecipeBox.style.display = 'none';
-        rrIndex.style.display = 'block';
+        rrIndex.style.display = 'flex';
     }
 
     function hideAllRecipes() {    
