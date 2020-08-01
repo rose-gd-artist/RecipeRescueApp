@@ -556,39 +556,60 @@ div.FullRecipeImage {
         width: 5%;
         margin-left: 91vw;
     }
+    #rrFullRecipe {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    #goRight {
+        margin-top: -9vw;
+        margin-left: 78.5vw;
+    }
     div.FullRecipeImage {
         width: 80%;
-        height: 24vw;
-        margin-top: -8vw;
+        height: 28vw;
         margin-left: 10%;
         margin-right: 10%;
-        margin-bottom: 3vw;
     }
     .FullRecipeTitle {
-        font-size: 3vw;
-        margin-bottom: 2vw;
+        font-size: 4vw;
+        margin-bottom: 3vw;
+        line-height: 5vw;
     }
     .FullRecipePrepTime, .FullRecipeServesNum, .FullRecipeCookTime, .FullRecipeIngredients, .FullRecipeDirections {
-        font-size: 1.8vw;
+        font-size: 2.5vw;
         margin-left: 10%;
+        margin-bottom: 3vw;
+    }
+    .recipeDirLines, .recipeILines {
+        margin-left: 3vw;
+        line-height: 3.5vw;
+        margin-top: 2vw;
+        margin-bottom: 2vw;
     }
     .FullRecipePerServing, .FullRecipeSource {
-        font-size: 1.6vw;
+        font-size: 2.3vw;
         margin-left: 10%;
+        margin-bottom: 2vw;
     }
     .rrPDFbutton {
-        width: 30vw;
-        height: 5.5vw;
+        width: 60%;
+        height: 6.5vw;
         border-radius: 3vw;
-        font-size: 2vw;
-        margin-top: 5vw;
-        margin-left: 23%;
-        padding-top: 1.4vw;
+        font-size: 2.5vw;
+        margin-top: 6vw;
+        margin-left: 21.5%;
+        padding-top: 1.5vw;
     }
-    #footerR {
-        height: 14vw;
-        font-size: 2vw;
-        padding: 4vw;
+    .grocery-list-background {
+        padding-bottom: 1rem; 
+    }
+    #groceryListContainer {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: 10vw;
+        padding: 2.5rem;
     }
     #exportPDF {
         margin: 7vw 0vw 4vw;
@@ -605,7 +626,7 @@ div.FullRecipeImage {
     }
     .ingredient-list-entry {
         font-size: 2.4vw;
-        line-height: 5vw;
+        line-height: 6vw;
     }
     .remove-item {
         font-size: 2.4vw;
@@ -617,10 +638,15 @@ div.FullRecipeImage {
         width: 2.75vw;
     }
     .quantity-field {
-        width: 2.25rem;
-        height: 1.5rem;
+        width: 2.75rem;
+        height: 1.75rem;
         margin-left: 0.85rem;
         margin-right: 0.85rem;
+    }
+    #footerR {
+        height: 14vw;
+        font-size: 2vw;
+        padding: 4vw;
     }
     
 }
@@ -689,7 +715,19 @@ div.FullRecipeImage {
         font-size: 2.15vw;
     }
     #groceryListContainer {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
         margin-bottom: 10vw;
+        padding: 2.5rem;
+    }
+    .remove-item {
+        font-size: 2.4vw;
+        line-height: 5vw;
+    }
+    .remove-ingredient {
+	    margin-bottom: -.4rem;
+        width: 3.25vw;
     }
 	#exportPDF {
 		width: 55%;
@@ -697,10 +735,10 @@ div.FullRecipeImage {
 		margin-bottom: 2.5rem;
 		height: 7vw;
         font-size: 2.5vw;
-        margin-left: 22.5%;
+        margin-left: 20%;
 	}
 	.grocery-list-background {
-		padding: 1rem;
+		padding: 1rem 0rem;
     }
     
     #footerR {
@@ -712,9 +750,114 @@ div.FullRecipeImage {
 }
 
 @media screen and (max-width: 375px) {
+    .food-title, .food-title2 {
+        font-size: 3.5vw;
+        line-height: 4vw;
+    }
+    .food-title-and-link a {
+        font-size: 3vw;
+        line-height: 5.25vw;
+    }
+    .food-title-and-link2 .recipeBookmark {
+        font-size: 3vw;
+        line-height: 8.25vw;
+    }
+    #groceryListContainer {
+        width: 90%;
+        padding: 4rem;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: 3vw;
+    }
 	.add-to-grocery-list {
-    	font-size: .7rem;
+    	font-size: 2.5vw;
+    }
+    .plus-sign {
+        width: 6vw;
+        margin-top: 1.5vw;
+        margin-bottom: 1vw;
+    }
+    span#addGlistWords {
+        font-size: 2.25vw;
+        width: 2vw;
+        display: table-footer-group;
+    }
+    #rrFullRecipe {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    div.FullRecipeImage {
+        height: 28vw;
+    }
+    .FullRecipeTitle {
+        font-size: 4vw;
+        margin-bottom: 3vw;
+        line-height: ;
+    }
+    .FullRecipePrepTime, .FullRecipeServesNum, .FullRecipeCookTime, .FullRecipeIngredients, .FullRecipeDirections {
+        font-size: 2.8vw;
+        margin-bottom: 3vw;
+    }
+    .recipeDirLines, .recipeILines {
+        margin-left: 3vw;
+        line-height: 3.5vw;
+        margin-top: 2vw;
+        margin-bottom: 2vw;
+    }
+    .FullRecipePerServing, .FullRecipeSource {
+        font-size: 2.6vw;
+        margin-bottom: 2vw;
+    }
+    .rrPDFbutton {
+        width: 60%;
+        height: 6.5vw;
+        border-radius: 3vw;
+        font-size: 2.5vw;
+        margin-top: 6vw;
+        margin-left: 21.5%;
+        padding-top: 1.5vw;
+    }
+    div#back-button {
+        width: 5%;
+        margin-left: 90vw;
+        padding-top: 4vw;
+        padding-bottom: 4vw;
+    }
+    #goRight {
+        margin-top: -9vw;
+        margin-left: 78.5vw;
+    }
+    #groceryListContainer {
+        padding: 1.25rem;
+    }
+    #exportPDF {
+        margin-bottom: 1.75rem;
+        margin-left: 20%;
 	}
+    .grocery-list-entry strong, .grocery-list-entry a {
+        font-size: 4vw;
+        line-height: 6vw;
+    }
+    .ingredient-list-entry {
+        font-size: 3.25vw;
+        line-height: 10vw;
+    }
+    .remove-item {
+        font-size: 3.25vw;
+        line-height: 7vw;
+    }
+    .remove-ingredient {
+	    margin-left: .25rem;
+	    margin-bottom: -.3rem;
+        width: 4vw;
+    }
+    .quantity-field {
+        width: 2.25rem;
+        height: 1.5rem;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
 }
 
 /* Styling for print/export */

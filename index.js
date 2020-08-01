@@ -45,7 +45,7 @@ $(document).ready(function(){
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
-                "x-rapidapi-key": "8fd4f85bddmsh92489d7ccb202dbp1eec27jsn251313e441a9"
+                "x-rapidapi-key":  recipePuppyAPI
             }
         }
         
@@ -72,7 +72,7 @@ $(document).ready(function(){
             });
     
             /* insert food title, recipe link, and 'add to grocery list' button */
-            recipeListing.innerHTML += "<div class='food-title-and-link'><span class='food-title'>" + newAnswer.results[i].title + "</span><br>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>Full Recipe</a> <div class='add-to-grocery-list'><img class='plus-sign' src='images/addTo.svg'>Add Ingredients to Grocery List</div></div>";
+            recipeListing.innerHTML += "<div class='food-title-and-link'><span class='food-title'>" + newAnswer.results[i].title + "</span><br>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>Full Recipe</a> <div class='add-to-grocery-list'><img class='plus-sign' src='images/addTo.svg'><span id='addGlistWords'>Add Ingredients to Grocery List</span></div></div>";
                 
             /* adding ingredients to grocery list */
             let currentGroceryItem = document.getElementsByClassName("add-to-grocery-list")[i];
@@ -200,13 +200,13 @@ let rrRecipeList = [
         "<li class='recipeILines'>3/4 cup Italian bread crumbs</li>",
         "<li class='recipeILines'>1/2 cup flour</li>",
         "<li class='recipeILines'>1/2 cup grated Parmesan cheese</li>",
-        "<li class='recipeILines'>8 boneless pork chops, cut 1/2 inch</br>&nbsp;&nbsp;&nbsp;thick</li>",
+        "<li class='recipeILines'>8 boneless pork chops, cut 1/2 inch thick</li>",
         "<li class='recipeILines'>1/4 cup olive oil</li>",
-        "<li class='recipeILines'>1-1/2 cups Marsala wine or apple</br>&nbsp;&nbsp;&nbsp;juice</li>",
+        "<li class='recipeILines'>1-1/2 cups Marsala wine or apple juice</li>",
         "<li class='recipeILines'>1-1/2 tbsp Butter</li>",
         "<li class='recipeILines'>2 (8-oz.) pkg. sliced fresh mushrooms</li>",
         "<li class='recipeILines'>1/4 cup chopped fresh Italian parsley</li>",
-        "<li class='recipeILines'>Freshly grated Parmesan cheese</br>&nbsp;&nbsp;&nbsp;(optional)</li></ul>"],
+        "<li class='recipeILines'>Freshly grated Parmesan cheese (optional)</li></ul>"],
     directions: [
         "<ul class='recipeDir'><li class='recipeDHeader'><u>Directions:</u></li>",
         "<li class='recipeDirLines'>1. Stir together bread crumbs, flour, 1/2 cup Parmesan cheese, and salt and pepper to taste; dredge pork chops in mixture.</li>",
@@ -355,18 +355,18 @@ let rrRecipeList = [
         cookTime: "<u>Cook Time:</u> 15 minutes",
         RRingredients:
             ["<ul class='recipeI'><li class='recipeIHeader'><u>Ingredients:</u></li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;3/4 cup flour</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 tbsp ground cumin</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 tbsp chili powder</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1 tsp cayenne or ground pepper</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1-1/2 lbs tilapia fillets</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 eggs, lightly beaten</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;1/4 cup olive oil</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2/3 cup chopped tomatoes</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 tbsp fresh lime juice</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;8 flour tortillas (8-inch)</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;2 cups shredded Monterey Jack cheese with jalapenos (8 oz)</li>",
-            "<li class='recipeILines'>&nbsp;&nbsp;&nbsp;Salsa, sour cream (optional)</li></ul>"
+            "<li class='recipeILines'>3/4 cup flour</li>",
+            "<li class='recipeILines'>1 tbsp ground cumin</li>",
+            "<li class='recipeILines'>1 tbsp chili powder</li>",
+            "<li class='recipeILines'>1 tsp cayenne or ground pepper</li>",
+            "<li class='recipeILines'>1-1/2 lbs tilapia fillets</li>",
+            "<li class='recipeILines'>2 eggs, lightly beaten</li>",
+            "<li class='recipeILines'>1/4 cup olive oil</li>",
+            "<li class='recipeILines'>2/3 cup chopped tomatoes</li>",
+            "<li class='recipeILines'>2 tbsp fresh lime juice</li>",
+            "<li class='recipeILines'>8 flour tortillas (8-inch)</li>",
+            "<li class='recipeILines'>2 cups shredded Monterey Jack cheese with jalapenos (8 oz)</li>",
+            "<li class='recipeILines'>Salsa, sour cream (optional)</li></ul>"
             ],
         directions: [
             "<ul class='recipeDir'><li class='recipeDHeader'><u>Directions:</u></li>",
@@ -377,7 +377,7 @@ let rrRecipeList = [
             "<li class='recipeDirLines'>5. Cut each quesadilla into thirds. Serve warm with salsa and sour cream, if desired.</li></ul>"
         ],
         perServing: [
-            "<u>Per Serving:</u></br>675 calories, 37g carbohydrates,77g protein, 24g fat (8g sat fat),1g fiber, 140mg cholesterol,</br>&nbsp;&nbsp;&nbsp;665mg sodium, 0g omega3"
+            "<u>Per Serving:</u></br>675 calories, 37g carbohydrates,77g protein, 24g fat (8g sat fat),1g fiber, 140mg cholesterol, 665mg sodium, 0g omega3"
         ]
     },
 
