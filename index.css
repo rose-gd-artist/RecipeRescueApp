@@ -31,7 +31,7 @@ button {
 }
 
 .tab-1 {
-    width: 28%;
+    width: 40%;
     height: 6vw;
     border-top-left-radius: 3vw;
     border-top-right-radius: 3vw;
@@ -46,7 +46,7 @@ button {
 }
 
 .tab-2 {
-    width: 19%;
+    width: 30%;
     height: 6vw;
     border-top-left-radius: 3vw;
     border-top-right-radius: 3vw;
@@ -61,7 +61,7 @@ button {
 }
 
 .tab-3 {
-    width: 19%;
+    width: 30%;
     height: 6vw;
     border-top-left-radius: 3vw;
     border-top-right-radius: 3vw;
@@ -78,8 +78,8 @@ button {
 
 .tab-highlight {
     -webkit-box-shadow: 0px -2px 7px 1px rgba(255,255,255,1);
--moz-box-shadow: 0px -2px 7px 1px rgba(255,255,255,1);
-box-shadow: 0px -2px 7px 1px rgba(255,255,255,1);
+    -moz-box-shadow: 0px -2px 7px 1px rgba(255,255,255,1);
+    box-shadow: 0px -2px 7px 1px rgba(255,255,255,1);
 }
 
 .tab-content {
@@ -101,7 +101,6 @@ box-shadow: 0px -2px 7px 1px rgba(255,255,255,1);
 .search-bar-container {
 	display: flex;
     position: relative;
-    background-color: #F6921E;
 }
 
 #searchIngredients, #searchFood {
@@ -152,7 +151,7 @@ input {
 
 .results-container {
 	padding-top: 1rem;
-	background-color: #F6921E;
+    background-color: #F6921E;
 	min-height: 100%;
 	margin-bottom: 3rem;
 }
