@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
   let allTabs = document.getElementsByClassName("tab");
+  const tab1 = document.getElementsByClassName("tab-1")[0];
   const tab2 = document.getElementsByClassName("tab-2")[0];
   const tab3 = document.getElementsByClassName("tab-3")[0];
   let tabContents = document.getElementsByClassName("tab-content");
@@ -9,6 +10,8 @@ $(document).ready(function () {
   let rrRecipeBox = document.getElementById("rrRecipeBox");
 
   /* page tabs */
+  tab1.classList.add("activeButton");
+
   for (let i = 0; i < allTabs.length; i++) {
     allTabs[i].addEventListener("click", function () {
       for (let i = 0; i < allTabs.length; i++) {
@@ -21,7 +24,7 @@ $(document).ready(function () {
       }
       tabContents[i].classList.add("active-tab"); /* add class to current tab */
       allTabs[i].classList.add("activeButton");
-      tab3.classList.remove("tab-highlight");
+      tab3.style.boxShadow = "none";
     });
   } /* end page tabs */
 
@@ -89,7 +92,14 @@ $(document).ready(function () {
 
         groceryListContainer.innerHTML += "<div class='grocery-list-entry'><strong>" + "<a href='" + newAnswer.results[i].href + "' target='_blank'>" + newAnswer.results[i].title + "</a>" + ":</strong><br>" + bulletedList + "<br><span class='remove-item'>remove item</span></div>";
 
-        tab3.classList.add("tab-highlight");
+        /* grocery cart tab glows when items are added */
+        tab3.style.boxShadow = "0px -2px 5px 0px rgba(255,255,255,1)";
+
+        /* grocery cart tab bounces when items are added */
+        tab3.classList.add("tab-bounce");
+        setTimeout(function() { 
+          tab3.classList.remove("tab-bounce") 
+        }, 1000);
 
         /* removing items from a grocery list */
         let removeItem = document.getElementsByClassName("remove-item");
