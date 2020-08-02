@@ -19,7 +19,7 @@ body {
 #rrLogo {
     width: 25%;
     height: auto;
-    margin: 1.2vw 2vw 0.8vw;
+    margin: 2vw 2vw 2vw;
 }
 
 button {
@@ -76,10 +76,22 @@ button {
     z-index: 99999;
 }
 
-.tab-highlight {
-    -webkit-box-shadow: 0px -2px 7px 1px rgba(255,255,255,1);
-    -moz-box-shadow: 0px -2px 7px 1px rgba(255,255,255,1);
-    box-shadow: 0px -2px 7px 1px rgba(255,255,255,1);
+.tab-bounce {
+    color: white;
+    text-shadow: 0px 0px 2px #FFFFFF;
+    animation: bounce 1s ease-in-out;
+}
+
+@keyframes bounce {
+	0% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-.4rem);
+	}
+	100% {
+		transform: translateY(0);
+	}
 }
 
 .tab-content {
@@ -149,6 +161,11 @@ input {
     cursor: pointer;
 }
 
+#submit:hover {
+    background-color: #772001;
+    color: #f6921e;
+}
+
 .results-container {
 	padding-top: 1rem;
     background-color: #F6921E;
@@ -167,7 +184,7 @@ input {
 /* recipe blocks that are generated */
 .food-block, .food-block2 {
 	display: flex;
-	width: 47%;
+	width: 46%;
 	margin: 1rem;
     align-items: center;
     background-color: white;
@@ -255,6 +272,11 @@ input {
     cursor: pointer;
     margin-right: 34.5%;
     margin-left: 34.5%;
+}
+
+#exportPDF:hover {
+    background-color: #772001;
+    color: #f6921e;
 }
 
 /* on grocery list page */
@@ -351,6 +373,7 @@ div#back-button {
     width: 4%;
     margin-left: 91vw;
     opacity: 0.7;
+    cursor: pointer;
 }
 
 div#back-button:hover {
@@ -363,6 +386,7 @@ div#back-button:hover {
     margin-left: 2vw;
     position: relative;
     z-index: 99;
+    cursor: pointer;
 }
 #goRight {
     width: 10%;
@@ -371,6 +395,7 @@ div#back-button:hover {
     position: relative;
     display: inline-block;
     z-index: 99;
+    cursor: pointer;
 }
 
 .FullRecipePage {
@@ -457,6 +482,7 @@ div.FullRecipeImage {
     margin-top: 2vw;
     margin-left: 37.5%;
     padding-top: 1.12vw;
+    cursor: pointer;
 }
 .rrPDFbutton:hover {
     background-color: #772001;
@@ -489,6 +515,12 @@ div.FullRecipeImage {
 	.food-image, .food-image2 {
 		height: 8rem;
 	}
+	#addGlistWords {
+    	display: inline-block;
+    	font-size: .6rem;
+    	margin-left: 1.5rem;
+    	margin-top: -.5rem;
+	}
 }
 
 @media screen and (max-width: 640px) {
@@ -503,6 +535,9 @@ div.FullRecipeImage {
         -moz-border-radius: 4vw 4vw 0vw 0vw;
         -webkit-border-radius: 4vw 4vw 0vw 0vw;
     }
+    #addGlistWords {
+    	margin-left: auto;
+	}
     .food-title, .food-title2 {
         font-size: 3vw;
         line-height: 4vw;
@@ -735,12 +770,10 @@ div.FullRecipeImage {
         width: 3.25vw;
     }
 	#exportPDF {
-		width: 55%;
 		margin-top: 1.5rem;
 		margin-bottom: 2.5rem;
-		height: 7vw;
+		height: 8vw;
         font-size: 2.5vw;
-        margin-left: 20%;
 	}
 	.grocery-list-background {
 		padding: 1rem 0rem;
@@ -778,9 +811,7 @@ div.FullRecipeImage {
     	font-size: 2.5vw;
     }
     .plus-sign {
-        width: 6vw;
-        margin-top: 1.5vw;
-        margin-bottom: 1vw;
+        display: none;
     }
     span#addGlistWords {
         font-size: 2.25vw;
@@ -838,7 +869,6 @@ div.FullRecipeImage {
     }
     #exportPDF {
         margin-bottom: 1.75rem;
-        margin-left: 20%;
 	}
     .grocery-list-entry strong, .grocery-list-entry a {
         font-size: 4vw;
@@ -867,6 +897,10 @@ div.FullRecipeImage {
 
 /* Styling for print/export */
 @media print {
+
+	#rrLogo {
+		display: none;
+	}
 	input, button, #results {
 		display: none;
 	}
