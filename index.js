@@ -44,7 +44,7 @@ $(document).ready(function () {
       "method": "GET",
       "headers": {
         "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
-        "x-rapidapi-key": recipePuppyAPI
+        "x-rapidapi-key":  recipePuppyAPI
       }
     }
 
